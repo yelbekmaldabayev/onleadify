@@ -1,0 +1,296 @@
+---
+
+---
+
+<section class="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden">
+  <!-- Ambient background effects -->
+  <div class="absolute inset-0 bg-background"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-grid"></div>
+  
+  <div class="relative z-10 mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 py-20 text-center">
+    <div class="inline-flex items-center gap-2 rounded-full border border-border bg-secondary/80 backdrop-blur-sm px-4 py-1.5 mb-8 animate-fade-in badge-glow">
+      <span class="h-2 w-2 rounded-full bg-green-500 animate-pulse shadow-[0_0_8px_rgba(34,197,94,0.6)]"></span>
+      <span class="text-sm text-muted-foreground">Веб-студия и автоматизация</span>
+    </div>
+    
+    <h1 class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight mb-6 text-balance min-h-[1.2em] sm:min-h-[2.4em]">
+      <span class="typewriter gradient-text" id="typewriter-main"></span>
+      <span class="typing-cursor">|</span>
+    </h1>
+    
+    <p class="mx-auto max-w-2xl text-lg sm:text-xl text-muted-foreground mb-12 leading-relaxed hero-description">
+      Разрабатываем веб-решения и внедряем AI-автоматизацию, чтобы ваш бизнес работал эффективнее и приносил больше прибыли
+    </p>
+    
+    <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-20 hero-buttons">
+      <a href="/contact" class="group relative inline-flex items-center justify-center h-12 px-8 text-base bg-foreground text-background font-medium gap-2 rounded-md transition-all duration-300 overflow-hidden btn-primary">
+        <span class="relative z-10 flex items-center gap-2">
+          Получить консультацию
+          <svg class="transition-transform group-hover:translate-x-1" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+        </span>
+      </a>
+      <a href="#cases" class="inline-flex items-center justify-center h-12 px-8 text-base border border-border text-foreground hover:bg-secondary hover:border-muted-foreground/50 rounded-md transition-all duration-300 backdrop-blur-sm">
+        Смотреть кейсы
+      </a>
+    </div>
+    
+    <div class="grid grid-cols-3 gap-6 md:gap-12 max-w-3xl mx-auto pt-12 border-t border-border/50 hero-stats">
+      <div class="text-center stat-item group">
+        <div class="text-3xl sm:text-4xl font-bold stat-number gradient-text-subtle" data-target="20" data-suffix="k+">0</div>
+        <div class="text-sm text-muted-foreground mt-2 group-hover:text-foreground/70 transition-colors">Лидов привлечено</div>
+      </div>
+      <div class="text-center stat-item group">
+        <div class="text-3xl sm:text-4xl font-bold stat-number gradient-text-subtle" data-target="52" data-suffix="+">0</div>
+        <div class="text-sm text-muted-foreground mt-2 group-hover:text-foreground/70 transition-colors">Проектов запущено</div>
+      </div>
+      <div class="text-center stat-item group">
+        <div class="text-3xl sm:text-4xl font-bold stat-number gradient-text-subtle" data-target="4" data-suffix="+">0</div>
+        <div class="text-sm text-muted-foreground mt-2 group-hover:text-foreground/70 transition-colors">Лет на рынке</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  /* Ambient glow effect */
+  .hero-glow {
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 600px;
+    height: 400px;
+    background: radial-gradient(ellipse, rgba(120, 119, 198, 0.15) 0%, transparent 70%);
+    pointer-events: none;
+    animation: glowPulse 8s ease-in-out infinite;
+  }
+  
+  /* Subtle grid pattern */
+  .hero-grid {
+    position: absolute;
+    inset: 0;
+    background-image: 
+      linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+    background-size: 60px 60px;
+    mask-image: radial-gradient(ellipse 80% 50% at 50% 50%, black 40%, transparent 100%);
+    pointer-events: none;
+  }
+  
+  /* Gradient text effect */
+  .gradient-text {
+    background: linear-gradient(135deg, #ffffff 0%, #a1a1aa 50%, #ffffff 100%);
+    background-size: 200% 200%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: gradientShift 8s ease infinite;
+  }
+  
+  .gradient-text-subtle {
+    background: linear-gradient(135deg, #fafafa 0%, #d4d4d8 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  
+  /* Badge glow */
+  .badge-glow {
+    box-shadow: 0 0 20px rgba(120, 119, 198, 0.1);
+  }
+  
+  /* Primary button effects */
+  .btn-primary {
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+  }
+  
+  .btn-primary::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, transparent 50%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+  
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+  }
+  
+  .btn-primary:hover::before {
+    opacity: 1;
+  }
+  
+  .animate-fade-in {
+    animation: fadeIn 0.6s ease-out forwards;
+  }
+  
+  .typing-cursor {
+    animation: blink 0.8s infinite;
+    font-weight: 100;
+    opacity: 1;
+    color: #a1a1aa;
+  }
+  
+  .hero-description {
+    opacity: 0;
+    animation: fadeInUp 0.8s ease-out 2.5s forwards;
+  }
+  
+  .hero-buttons {
+    opacity: 0;
+    animation: fadeInUp 0.8s ease-out 2.8s forwards;
+  }
+  
+  .hero-stats {
+    opacity: 0;
+    animation: fadeInUp 0.8s ease-out 3.1s forwards;
+  }
+  
+  .stat-item {
+    opacity: 0;
+    animation: fadeInUp 0.5s ease-out forwards;
+    position: relative;
+  }
+  
+  .stat-item::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 50%;
+    transform: translateX(-50%) scaleX(0);
+    width: 40px;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, rgba(161, 161, 170, 0.5), transparent);
+    transition: transform 0.3s ease;
+  }
+  
+  .stat-item:hover::after {
+    transform: translateX(-50%) scaleX(1);
+  }
+  
+  .stat-item:nth-child(1) { animation-delay: 3.2s; }
+  .stat-item:nth-child(2) { animation-delay: 3.4s; }
+  .stat-item:nth-child(3) { animation-delay: 3.6s; }
+  .stat-item:nth-child(4) { animation-delay: 3.8s; }
+  
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  
+  @keyframes fadeInUp {
+    from { 
+      opacity: 0; 
+      transform: translateY(20px);
+    }
+    to { 
+      opacity: 1; 
+      transform: translateY(0);
+    }
+  }
+  
+  @keyframes blink {
+    0%, 50% { opacity: 1; }
+    51%, 100% { opacity: 0; }
+  }
+  
+  @keyframes glowPulse {
+    0%, 100% { opacity: 0.5; transform: translateX(-50%) scale(1); }
+    50% { opacity: 0.8; transform: translateX(-50%) scale(1.1); }
+  }
+  
+  @keyframes gradientShift {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const phrases = [
+      'Создаём системы, которые\nприводят клиентов',
+      'Автоматизируем процессы,\nкоторые экономят время'
+    ];
+    
+    let phraseIndex = 0;
+    let charIndex = 0;
+    let isDeleting = false;
+    let isPaused = false;
+    
+    const typewriterEl = document.getElementById('typewriter-main');
+    const cursorEl = document.querySelector('.typing-cursor');
+    
+    function type() {
+      const currentPhrase = phrases[phraseIndex];
+      
+      if (isPaused) {
+        setTimeout(type, 50);
+        return;
+      }
+      
+      if (!isDeleting) {
+        typewriterEl.innerHTML = currentPhrase.substring(0, charIndex + 1).replace('\n', '<br />');
+        charIndex++;
+        
+        if (charIndex === currentPhrase.length) {
+          isPaused = true;
+          setTimeout(() => {
+            isPaused = false;
+            isDeleting = true;
+          }, 3000);
+        }
+      } else {
+        typewriterEl.innerHTML = currentPhrase.substring(0, charIndex - 1).replace('\n', '<br />');
+        charIndex--;
+        
+        if (charIndex === 0) {
+          isDeleting = false;
+          phraseIndex = (phraseIndex + 1) % phrases.length;
+        }
+      }
+      
+      const speed = isDeleting ? 30 : 60;
+      setTimeout(type, speed);
+    }
+    
+    // Start typewriter
+    setTimeout(type, 500);
+    
+    // Animate stats counting
+    const observerOptions = {
+      threshold: 0.5
+    };
+    
+    const statsObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const statNumbers = document.querySelectorAll('.stat-number');
+          statNumbers.forEach(stat => {
+            const target = parseInt(stat.dataset.target);
+            const suffix = stat.dataset.suffix || '+';
+            let current = 0;
+            const increment = target / 40;
+            const timer = setInterval(() => {
+              current += increment;
+              if (current >= target) {
+                stat.textContent = target + suffix;
+                clearInterval(timer);
+              } else {
+                stat.textContent = Math.floor(current);
+              }
+            }, 50);
+          });
+          statsObserver.disconnect();
+        }
+      });
+    }, observerOptions);
+    
+    const statsSection = document.querySelector('.hero-stats');
+    if (statsSection) {
+      statsObserver.observe(statsSection);
+    }
+  });
+</script>

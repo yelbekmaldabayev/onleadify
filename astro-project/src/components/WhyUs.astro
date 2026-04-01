@@ -1,0 +1,177 @@
+---
+const advantages = [
+  {
+    icon: "check",
+    title: "Работаем на результат",
+    description: "Не просто делаем сайты — создаём системы, которые генерируют прибыль",
+  },
+  {
+    icon: "clock",
+    title: "Быстрый запуск",
+    description: "От брифа до запуска — 2-4 недели. Без затягивания сроков и бесконечных правок",
+  },
+  {
+    icon: "users",
+    title: "Полное сопровождение",
+    description: "Обучаем вашу команду и поддерживаем проект после запуска",
+  },
+  {
+    icon: "shield",
+    title: "Гарантия качества",
+    description: "Используем проверенные технологии и даём гарантию на все работы",
+  },
+]
+
+const icons: Record<string, string> = {
+  check: '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg>',
+  clock: '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>',
+  users: '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>',
+  shield: '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/></svg>',
+}
+---
+
+<section class="py-16 sm:py-24">
+  <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-10 sm:mb-16 whyus-header">
+      <span class="inline-block text-xs font-medium text-muted-foreground uppercase tracking-widest mb-3 sm:mb-4">Преимущества</span>
+      <h2 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-foreground">
+        Почему выбирают нас
+      </h2>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-8 whyus-grid">
+      {advantages.map((item, idx) => (
+        <div
+          class="advantage-card group text-center p-5 sm:p-6 rounded-xl border border-transparent transition-all duration-500"
+          data-index={idx}
+        >
+          <div class="mx-auto flex h-11 w-11 sm:h-12 sm:w-12 items-center justify-center rounded-lg bg-secondary border border-border mb-4 sm:mb-6 icon-box transition-all duration-300">
+            <span class="text-foreground" set:html={icons[item.icon]} />
+          </div>
+          <h3 class="text-base sm:text-lg font-semibold text-foreground mb-2 sm:mb-3">
+            {item.title}
+          </h3>
+          <p class="text-sm text-muted-foreground leading-relaxed">
+            {item.description}
+          </p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .whyus-header {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.6s ease-out;
+  }
+  
+  .whyus-header.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+  .advantage-card {
+    opacity: 0;
+    transform: translateY(25px);
+    transition: all 0.5s ease-out, border-color 0.3s ease, background 0.3s ease;
+  }
+  
+  .advantage-card.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+  .advantage-card.active,
+  .advantage-card:hover {
+    border-color: var(--border);
+    background: var(--card);
+  }
+  
+  .advantage-card.active .icon-box,
+  .advantage-card:hover .icon-box {
+    background: rgba(255, 255, 255, 0.1);
+    transform: scale(1.1);
+  }
+  
+  .advantage-card .icon-box {
+    animation: float 3s ease-in-out infinite;
+    animation-play-state: paused;
+  }
+  
+  .advantage-card.active .icon-box {
+    animation-play-state: running;
+  }
+  
+  .advantage-card[data-index="0"] .icon-box { animation-delay: 0s; }
+  .advantage-card[data-index="1"] .icon-box { animation-delay: 0.5s; }
+  .advantage-card[data-index="2"] .icon-box { animation-delay: 1s; }
+  .advantage-card[data-index="3"] .icon-box { animation-delay: 1.5s; }
+  
+  @keyframes float {
+    0%, 100% { transform: translateY(0) scale(1.1); }
+    50% { transform: translateY(-5px) scale(1.1); }
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const header = document.querySelector('.whyus-header');
+    const cards = document.querySelectorAll('.advantage-card');
+    let activeIndex = 0;
+    let cycleInterval: ReturnType<typeof setInterval>;
+    
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          if (entry.target.classList.contains('whyus-header')) {
+            entry.target.classList.add('visible');
+          }
+          if (entry.target.classList.contains('advantage-card')) {
+            const index = parseInt((entry.target as HTMLElement).dataset.index || '0');
+            setTimeout(() => {
+              entry.target.classList.add('visible');
+            }, index * 100);
+          }
+        }
+      });
+    }, { threshold: 0.2 });
+    
+    if (header) observer.observe(header);
+    cards.forEach(card => observer.observe(card));
+    
+    function cycleAdvantages() {
+      cards.forEach(card => card.classList.remove('active'));
+      cards[activeIndex].classList.add('active');
+      activeIndex = (activeIndex + 1) % cards.length;
+    }
+    
+    const cycleObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          cycleInterval = setInterval(cycleAdvantages, 2000);
+          cycleAdvantages();
+        } else {
+          clearInterval(cycleInterval);
+          cards.forEach(card => card.classList.remove('active'));
+        }
+      });
+    }, { threshold: 0.3 });
+    
+    const grid = document.querySelector('.whyus-grid');
+    if (grid) cycleObserver.observe(grid);
+    
+    cards.forEach(card => {
+      card.addEventListener('mouseenter', () => {
+        clearInterval(cycleInterval);
+        cards.forEach(c => c.classList.remove('active'));
+        card.classList.add('active');
+      });
+      
+      card.addEventListener('mouseleave', () => {
+        cycleInterval = setInterval(cycleAdvantages, 2000);
+      });
+    });
+  });
+</script>

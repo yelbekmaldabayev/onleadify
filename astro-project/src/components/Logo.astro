@@ -1,0 +1,35 @@
+---
+interface Props {
+  size?: 'sm' | 'md' | 'lg';
+  showText?: boolean;
+}
+
+const { size = 'md', showText = true } = Astro.props;
+
+const sizes = {
+  sm: { icon: 'w-7 h-7', text: 'text-base' },
+  md: { icon: 'w-9 h-9', text: 'text-lg' },
+  lg: { icon: 'w-12 h-12', text: 'text-2xl' }
+};
+---
+
+<a href="/" class="flex items-center gap-2.5 group">
+  <div class={`${sizes[size].icon} relative`}>
+    <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-full">
+      <rect width="40" height="40" rx="10" fill="url(#logo-gradient)" class="transition-all duration-300 group-hover:opacity-90"/>
+      <path d="M11 28V12H16C18.2 12 19.9 12.5 21.2 13.6C22.5 14.6 23.1 16 23.1 17.8C23.1 19.6 22.5 21 21.2 22C19.9 23 18.2 23.5 16 23.5H14.5V28H11ZM14.5 20.5H15.8C16.9 20.5 17.8 20.2 18.4 19.7C19 19.2 19.3 18.5 19.3 17.6C19.3 16.7 19 16 18.4 15.5C17.8 15 16.9 14.8 15.8 14.8H14.5V20.5Z" fill="white"/>
+      <circle cx="27.5" cy="24.5" r="4.5" fill="#22c55e" class="animate-pulse"/>
+      <defs>
+        <linearGradient id="logo-gradient" x1="0" y1="0" x2="40" y2="40" gradientUnits="userSpaceOnUse">
+          <stop stop-color="#8b5cf6"/>
+          <stop offset="1" stop-color="#6366f1"/>
+        </linearGradient>
+      </defs>
+    </svg>
+  </div>
+  {showText && (
+    <span class={`${sizes[size].text} font-semibold text-foreground tracking-tight transition-colors`}>
+      Onleadify
+    </span>
+  )}
+</a>

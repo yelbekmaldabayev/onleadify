@@ -1,0 +1,260 @@
+---
+const services = [
+  {
+    category: "BUILD",
+    title: "Веб-разработка",
+    description: "Создаём сайты и веб-приложения, которые конвертируют посетителей в клиентов",
+    items: [
+      { icon: "globe", name: "Лендинги и корпоративные сайты" },
+      { icon: "database", name: "CRM и системы управления" },
+      { icon: "zap", name: "Интеграция сервисов" },
+    ],
+  },
+  {
+    category: "AUTOMATE",
+    title: "AI-Автоматизация",
+    description: "Внедряем искусственный интеллект для оптимизации бизнес-процессов",
+    items: [
+      { icon: "bot", name: "AI-чатботы и ассистенты" },
+      { icon: "message", name: "Автоматизация коммуникаций" },
+      { icon: "zap", name: "Умные воронки продаж" },
+    ],
+  },
+  {
+    category: "GROW",
+    title: "Системы роста",
+    description: "Разрабатываем стратегии и инструменты для масштабирования бизнеса",
+    items: [
+      { icon: "trending", name: "Аналитика и отчётность" },
+      { icon: "database", name: "Системы лидогенерации" },
+      { icon: "zap", name: "Маркетинговые автоматизации" },
+    ],
+  },
+]
+
+const icons: Record<string, string> = {
+  globe: '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>',
+  database: '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5V19A9 3 0 0 0 21 19V5"/><path d="M3 12A9 3 0 0 0 21 12"/></svg>',
+  zap: '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z"/></svg>',
+  bot: '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 8V4H8"/><rect width="16" height="12" x="4" y="8" rx="2"/><path d="M2 14h2"/><path d="M20 14h2"/><path d="M15 13v2"/><path d="M9 13v2"/></svg>',
+  message: '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg>',
+  trending: '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>',
+}
+---
+
+<section id="services" class="py-16 sm:py-24">
+  <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-12 sm:mb-16 section-header">
+      <span class="inline-block text-xs font-medium text-muted-foreground uppercase tracking-widest mb-4">Наши услуги</span>
+      <h2 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-foreground text-balance px-2">
+        Комплексные решения для вашего бизнеса
+      </h2>
+      <p class="mt-4 sm:mt-6 text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed px-2">
+        От идеи до реализации — мы создаём цифровые продукты, которые работают на результат
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6 services-grid">
+      {services.map((service, idx) => (
+        <div
+          class={`service-card group rounded-xl border border-border bg-card p-6 sm:p-8 transition-all duration-500 ${idx === 1 ? 'md:-translate-y-4' : ''}`}
+          data-index={idx}
+        >
+          <span class="inline-block text-xs font-medium text-muted-foreground tracking-widest mb-3 sm:mb-4">
+            {service.category}
+          </span>
+          <h3 class="text-lg sm:text-xl font-semibold text-foreground mb-2 sm:mb-3">
+            {service.title}
+          </h3>
+          <p class="text-muted-foreground text-sm mb-6 sm:mb-8 leading-relaxed">
+            {service.description}
+          </p>
+
+          <ul class="space-y-3 sm:space-y-4">
+            {service.items.map((item, itemIdx) => (
+              <li class="flex items-center gap-3 sm:gap-4 service-item" data-item-index={itemIdx}>
+                <div class="flex h-9 w-9 sm:h-10 sm:w-10 items-center justify-center rounded-lg bg-secondary border border-border icon-container transition-all duration-300 flex-shrink-0">
+                  <span class="text-foreground" set:html={icons[item.icon]} />
+                </div>
+                <span class="text-sm text-foreground">{item.name}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .section-header {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s ease-out;
+  }
+  
+  .section-header.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+  .service-card {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: all 0.6s ease-out, border-color 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  /* Subtle gradient overlay on active */
+  .service-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(120, 119, 198, 0.05) 0%, transparent 50%);
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    pointer-events: none;
+  }
+  
+  .service-card.active::before,
+  .service-card:hover::before {
+    opacity: 1;
+  }
+  
+  /* Corner accent */
+  .service-card::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 60px;
+    height: 60px;
+    background: radial-gradient(circle at top right, rgba(120, 119, 198, 0.15) 0%, transparent 70%);
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    pointer-events: none;
+  }
+  
+  .service-card.active::after,
+  .service-card:hover::after {
+    opacity: 1;
+  }
+  
+  .service-card.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+  .service-card[data-index="1"].visible {
+    transform: translateY(-16px);
+  }
+  
+  .service-card.active {
+    border-color: rgba(138, 138, 138, 0.5);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2), 0 0 0 1px rgba(120, 119, 198, 0.1);
+  }
+  
+  .service-card.active .icon-container {
+    background: rgba(120, 119, 198, 0.15);
+    border-color: rgba(120, 119, 198, 0.3);
+    box-shadow: 0 0 20px rgba(120, 119, 198, 0.2);
+  }
+  
+  .service-item {
+    opacity: 0;
+    transform: translateX(-10px);
+    transition: all 0.4s ease-out;
+  }
+  
+  .service-card.visible .service-item {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  
+  .service-card.visible .service-item[data-item-index="0"] { transition-delay: 0.1s; }
+  .service-card.visible .service-item[data-item-index="1"] { transition-delay: 0.2s; }
+  .service-card.visible .service-item[data-item-index="2"] { transition-delay: 0.3s; }
+  
+  .service-card:hover {
+    border-color: rgba(138, 138, 138, 0.5);
+    transform: translateY(-4px);
+  }
+  
+  .service-card[data-index="1"]:hover {
+    transform: translateY(-20px);
+  }
+  
+  .icon-container {
+    transition: all 0.4s ease;
+  }
+  
+  .service-card:hover .icon-container {
+    transform: scale(1.05);
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const cards = document.querySelectorAll('.service-card');
+    const header = document.querySelector('.section-header');
+    let activeIndex = 0;
+    let cycleInterval: ReturnType<typeof setInterval>;
+    
+    // Intersection observer for entrance animations
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          if (entry.target.classList.contains('section-header')) {
+            entry.target.classList.add('visible');
+          }
+          if (entry.target.classList.contains('service-card')) {
+            const index = parseInt((entry.target as HTMLElement).dataset.index || '0');
+            setTimeout(() => {
+              entry.target.classList.add('visible');
+            }, index * 150);
+          }
+        }
+      });
+    }, { threshold: 0.2 });
+    
+    if (header) observer.observe(header);
+    cards.forEach(card => observer.observe(card));
+    
+    // Auto-cycling highlight effect
+    function cycleCards() {
+      cards.forEach(card => card.classList.remove('active'));
+      cards[activeIndex].classList.add('active');
+      activeIndex = (activeIndex + 1) % cards.length;
+    }
+    
+    // Start cycling when cards are in view
+    const cycleObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          cycleInterval = setInterval(cycleCards, 2500);
+          cycleCards();
+        } else {
+          clearInterval(cycleInterval);
+          cards.forEach(card => card.classList.remove('active'));
+        }
+      });
+    }, { threshold: 0.3 });
+    
+    const servicesGrid = document.querySelector('.services-grid');
+    if (servicesGrid) cycleObserver.observe(servicesGrid);
+    
+    // Pause cycling on hover
+    cards.forEach(card => {
+      card.addEventListener('mouseenter', () => {
+        clearInterval(cycleInterval);
+        cards.forEach(c => c.classList.remove('active'));
+        card.classList.add('active');
+      });
+      
+      card.addEventListener('mouseleave', () => {
+        cycleInterval = setInterval(cycleCards, 2500);
+      });
+    });
+  });
+</script>

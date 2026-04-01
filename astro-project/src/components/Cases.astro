@@ -1,0 +1,193 @@
+---
+const cases = [
+  {
+    title: "Автосервис Premium",
+    category: "Веб-разработка + CRM",
+    result: "+340%",
+    resultLabel: "конверсия",
+    description: "Разработали сайт и внедрили CRM-систему с автоматической записью клиентов",
+  },
+  {
+    title: "Образовательная платформа",
+    category: "AI-автоматизация",
+    result: "80%",
+    resultLabel: "экономия времени",
+    description: "Создали AI-чатбота для поддержки студентов и автоматизации процессов",
+  },
+  {
+    title: "E-commerce проект",
+    category: "Система лидогенерации",
+    result: "12М",
+    resultLabel: "за 3 месяца",
+    description: "Построили воронку продаж с автоматизированным маркетингом",
+  },
+]
+---
+
+<section id="cases" class="py-16 sm:py-24 bg-card/30">
+  <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+    <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between mb-10 sm:mb-16 cases-header">
+      <div>
+        <span class="inline-block text-xs font-medium text-muted-foreground uppercase tracking-widest mb-3 sm:mb-4">Портфолио</span>
+        <h2 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-foreground">
+          Наши кейсы
+        </h2>
+      </div>
+      <a
+        href="#contact"
+        class="mt-4 sm:mt-0 inline-flex items-center gap-2 text-sm font-medium text-foreground hover:text-muted-foreground transition-colors group/link"
+      >
+        Все проекты
+        <svg class="transition-transform group-hover/link:translate-x-1 group-hover/link:-translate-y-1" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
+      </a>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 cases-grid">
+      {cases.map((caseItem, idx) => (
+        <div
+          class="case-card group rounded-xl border border-border bg-card overflow-hidden transition-all duration-500"
+          data-index={idx}
+        >
+          <div class="aspect-[4/3] bg-secondary flex items-center justify-center relative overflow-hidden case-image">
+            <div class="text-5xl sm:text-7xl font-bold text-muted-foreground/20 case-number transition-all duration-500">
+              {String(idx + 1).padStart(2, '0')}
+            </div>
+            <div class="absolute inset-0 bg-gradient-to-t from-card/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+          </div>
+          <div class="p-5 sm:p-6">
+            <span class="text-xs text-muted-foreground uppercase tracking-wider">{caseItem.category}</span>
+            <h3 class="mt-2 text-lg sm:text-xl font-semibold text-foreground">
+              {caseItem.title}
+            </h3>
+            <p class="mt-2 sm:mt-3 text-sm text-muted-foreground leading-relaxed">
+              {caseItem.description}
+            </p>
+            <div class="mt-4 sm:mt-6 flex items-baseline gap-2">
+              <span class="text-2xl sm:text-3xl font-bold text-foreground case-result">{caseItem.result}</span>
+              <span class="text-sm text-muted-foreground">{caseItem.resultLabel}</span>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .cases-header {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.6s ease-out;
+  }
+  
+  .cases-header.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+  .case-card {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.5s ease-out, border-color 0.3s ease;
+  }
+  
+  .case-card.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+  .case-card.active,
+  .case-card:hover {
+    border-color: rgba(138, 138, 138, 0.5);
+  }
+  
+  .case-card.active .case-number,
+  .case-card:hover .case-number {
+    transform: scale(1.1);
+    color: rgba(138, 138, 138, 0.3);
+  }
+  
+  .case-card.active .case-image,
+  .case-card:hover .case-image {
+    background: linear-gradient(135deg, rgba(38, 38, 38, 1) 0%, rgba(30, 30, 30, 1) 100%);
+  }
+  
+  .case-result {
+    display: inline-block;
+  }
+  
+  .case-card.visible .case-result {
+    animation: pulse-subtle 2s ease-in-out infinite;
+    animation-delay: calc(var(--index) * 0.3s);
+  }
+  
+  .case-card[data-index="0"] { --index: 0; }
+  .case-card[data-index="1"] { --index: 1; }
+  .case-card[data-index="2"] { --index: 2; }
+  
+  @keyframes pulse-subtle {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.7; }
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const header = document.querySelector('.cases-header');
+    const cards = document.querySelectorAll('.case-card');
+    let activeIndex = 0;
+    let cycleInterval: ReturnType<typeof setInterval>;
+    
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          if (entry.target.classList.contains('cases-header')) {
+            entry.target.classList.add('visible');
+          }
+          if (entry.target.classList.contains('case-card')) {
+            const index = parseInt((entry.target as HTMLElement).dataset.index || '0');
+            setTimeout(() => {
+              entry.target.classList.add('visible');
+            }, index * 150);
+          }
+        }
+      });
+    }, { threshold: 0.2 });
+    
+    if (header) observer.observe(header);
+    cards.forEach(card => observer.observe(card));
+    
+    // Auto-cycling for cases
+    function cycleCases() {
+      cards.forEach(card => card.classList.remove('active'));
+      cards[activeIndex].classList.add('active');
+      activeIndex = (activeIndex + 1) % cards.length;
+    }
+    
+    const cycleObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          cycleInterval = setInterval(cycleCases, 3000);
+          cycleCases();
+        } else {
+          clearInterval(cycleInterval);
+          cards.forEach(card => card.classList.remove('active'));
+        }
+      });
+    }, { threshold: 0.3 });
+    
+    const casesGrid = document.querySelector('.cases-grid');
+    if (casesGrid) cycleObserver.observe(casesGrid);
+    
+    cards.forEach(card => {
+      card.addEventListener('mouseenter', () => {
+        clearInterval(cycleInterval);
+        cards.forEach(c => c.classList.remove('active'));
+      });
+      
+      card.addEventListener('mouseleave', () => {
+        cycleInterval = setInterval(cycleCases, 3000);
+      });
+    });
+  });
+</script>
