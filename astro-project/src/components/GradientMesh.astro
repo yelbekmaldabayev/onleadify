@@ -1,0 +1,148 @@
+---
+
+---
+
+<div class="gradient-mesh-container">
+  <div class="gradient-mesh">
+    <div class="gradient-orb gradient-orb-1"></div>
+    <div class="gradient-orb gradient-orb-2"></div>
+    <div class="gradient-orb gradient-orb-3"></div>
+    <div class="gradient-orb gradient-orb-4"></div>
+  </div>
+  <div class="mesh-noise"></div>
+</div>
+
+<style>
+  .gradient-mesh-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: -1;
+    overflow: hidden;
+  }
+  
+  .gradient-mesh {
+    position: absolute;
+    inset: 0;
+    filter: blur(100px);
+    opacity: 0.4;
+  }
+  
+  .gradient-orb {
+    position: absolute;
+    border-radius: 50%;
+    mix-blend-mode: screen;
+  }
+  
+  .gradient-orb-1 {
+    width: 60vw;
+    height: 60vw;
+    max-width: 800px;
+    max-height: 800px;
+    background: radial-gradient(circle, rgba(139, 92, 246, 0.4) 0%, transparent 70%);
+    top: -20%;
+    left: -10%;
+    animation: orbMove1 25s ease-in-out infinite;
+  }
+  
+  .gradient-orb-2 {
+    width: 50vw;
+    height: 50vw;
+    max-width: 600px;
+    max-height: 600px;
+    background: radial-gradient(circle, rgba(59, 130, 246, 0.3) 0%, transparent 70%);
+    top: 30%;
+    right: -15%;
+    animation: orbMove2 30s ease-in-out infinite;
+  }
+  
+  .gradient-orb-3 {
+    width: 45vw;
+    height: 45vw;
+    max-width: 500px;
+    max-height: 500px;
+    background: radial-gradient(circle, rgba(168, 85, 247, 0.35) 0%, transparent 70%);
+    bottom: -10%;
+    left: 20%;
+    animation: orbMove3 20s ease-in-out infinite;
+  }
+  
+  .gradient-orb-4 {
+    width: 40vw;
+    height: 40vw;
+    max-width: 450px;
+    max-height: 450px;
+    background: radial-gradient(circle, rgba(99, 102, 241, 0.25) 0%, transparent 70%);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation: orbMove4 35s ease-in-out infinite;
+  }
+  
+  .mesh-noise {
+    position: absolute;
+    inset: 0;
+    opacity: 0.03;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  }
+  
+  @keyframes orbMove1 {
+    0%, 100% {
+      transform: translate(0, 0) scale(1);
+    }
+    25% {
+      transform: translate(10%, 15%) scale(1.1);
+    }
+    50% {
+      transform: translate(5%, 5%) scale(0.95);
+    }
+    75% {
+      transform: translate(-5%, 10%) scale(1.05);
+    }
+  }
+  
+  @keyframes orbMove2 {
+    0%, 100% {
+      transform: translate(0, 0) scale(1);
+    }
+    33% {
+      transform: translate(-15%, 10%) scale(1.15);
+    }
+    66% {
+      transform: translate(-5%, -10%) scale(0.9);
+    }
+  }
+  
+  @keyframes orbMove3 {
+    0%, 100% {
+      transform: translate(0, 0) scale(1);
+    }
+    50% {
+      transform: translate(20%, -15%) scale(1.2);
+    }
+  }
+  
+  @keyframes orbMove4 {
+    0%, 100% {
+      transform: translate(-50%, -50%) scale(1) rotate(0deg);
+    }
+    25% {
+      transform: translate(-40%, -60%) scale(1.1) rotate(90deg);
+    }
+    50% {
+      transform: translate(-60%, -40%) scale(0.9) rotate(180deg);
+    }
+    75% {
+      transform: translate(-45%, -55%) scale(1.05) rotate(270deg);
+    }
+  }
+  
+  @media (prefers-reduced-motion: reduce) {
+    .gradient-orb {
+      animation: none;
+    }
+  }
+</style>

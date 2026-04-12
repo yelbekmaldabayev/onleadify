@@ -62,25 +62,12 @@ const icons: Record<string, string> = {
 
 <style>
   .whyus-header {
-    opacity: 0;
-    transform: translateY(20px);
-    transition: all 0.6s ease-out;
-  }
-  
-  .whyus-header.visible {
-    opacity: 1;
-    transform: translateY(0);
+    /* Visibility handled by GSAP */
   }
   
   .advantage-card {
-    opacity: 0;
-    transform: translateY(25px);
-    transition: all 0.5s ease-out, border-color 0.3s ease, background 0.3s ease;
-  }
-  
-  .advantage-card.visible {
-    opacity: 1;
-    transform: translateY(0);
+    /* Removed opacity:0 - GSAP handles entrance */
+    transition: border-color 0.3s ease, background 0.3s ease, transform 0.3s ease;
   }
   
   .advantage-card.active,
@@ -117,29 +104,11 @@ const icons: Record<string, string> = {
 
 <script>
   document.addEventListener('DOMContentLoaded', () => {
-    const header = document.querySelector('.whyus-header');
     const cards = document.querySelectorAll('.advantage-card');
     let activeIndex = 0;
     let cycleInterval: ReturnType<typeof setInterval>;
     
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          if (entry.target.classList.contains('whyus-header')) {
-            entry.target.classList.add('visible');
-          }
-          if (entry.target.classList.contains('advantage-card')) {
-            const index = parseInt((entry.target as HTMLElement).dataset.index || '0');
-            setTimeout(() => {
-              entry.target.classList.add('visible');
-            }, index * 100);
-          }
-        }
-      });
-    }, { threshold: 0.2 });
-    
-    if (header) observer.observe(header);
-    cards.forEach(card => observer.observe(card));
+    // Removed entrance observer - GSAP handles animations now
     
     function cycleAdvantages() {
       cards.forEach(card => card.classList.remove('active'));

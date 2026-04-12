@@ -1,25 +1,32 @@
 ---
+import veelogImage from '../assets/Veelog_net.png';
+import jaziraImage from '../assets/jazira_kz.png';
+import oracleCareImage from '../assets/oracle_care_framer.png';
+
 const cases = [
   {
-    title: "Автосервис Premium",
-    category: "Веб-разработка + CRM",
-    result: "+340%",
-    resultLabel: "конверсия",
-    description: "Разработали сайт и внедрили CRM-систему с автоматической записью клиентов",
+    title: "VeeLog",
+    category: "Веб-приложение",
+    result: "Автоматизация",
+    resultLabel: "процессов для логистов и водителей",
+    description: "Этот веб приложение это онлайн-платформа для организации грузоперевозок, которая соединяет людей, которым нужно перевезти груз, с логистами и водителями, готовыми выполнить доставку.",
+    image: veelogImage,
   },
   {
-    title: "Образовательная платформа",
-    category: "AI-автоматизация",
-    result: "80%",
-    resultLabel: "экономия времени",
-    description: "Создали AI-чатбота для поддержки студентов и автоматизации процессов",
+    title: "Jazira",
+    category: "Лендинг",
+    result: "120+",
+    resultLabel: "клиентов",
+    description: "Лендинг для психолога по сопровождению подростков и родителей",
+    image: jaziraImage,
   },
   {
-    title: "E-commerce проект",
-    category: "Система лидогенерации",
-    result: "12М",
-    resultLabel: "за 3 месяца",
-    description: "Построили воронку продаж с автоматизированным маркетингом",
+    title: "Oracle Care",
+    category: "Веб-сайт + CRM",
+    result: "Оптимизация и экономия",
+    resultLabel: "времени внутренних процессов",
+    description: "Веб-сайт с интеграцией с CRM, автоответчиком и чат-ботом для бронирования клиентов.",
+    image: oracleCareImage,
   },
 ]
 ---
@@ -49,9 +56,17 @@ const cases = [
           data-index={idx}
         >
           <div class="aspect-[4/3] bg-secondary flex items-center justify-center relative overflow-hidden case-image">
-            <div class="text-5xl sm:text-7xl font-bold text-muted-foreground/20 case-number transition-all duration-500">
-              {String(idx + 1).padStart(2, '0')}
-            </div>
+            {caseItem.image ? (
+              <img 
+                src={caseItem.image.src} 
+                alt={caseItem.title}
+                class="w-full h-full object-contain transition-transform duration-500 group-hover:scale-105"
+              />
+            ) : (
+              <div class="text-5xl sm:text-7xl font-bold text-muted-foreground/20 case-number transition-all duration-500">
+                {String(idx + 1).padStart(2, '0')}
+              </div>
+            )}
             <div class="absolute inset-0 bg-gradient-to-t from-card/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
           </div>
           <div class="p-5 sm:p-6">
@@ -62,9 +77,9 @@ const cases = [
             <p class="mt-2 sm:mt-3 text-sm text-muted-foreground leading-relaxed">
               {caseItem.description}
             </p>
-            <div class="mt-4 sm:mt-6 flex items-baseline gap-2">
-              <span class="text-2xl sm:text-3xl font-bold text-foreground case-result">{caseItem.result}</span>
-              <span class="text-sm text-muted-foreground">{caseItem.resultLabel}</span>
+            <div class="mt-4 sm:mt-6">
+              <div class="text-2xl sm:text-3xl font-bold text-foreground case-result mb-1">{caseItem.result}</div>
+              <div class="text-sm text-muted-foreground leading-snug">{caseItem.resultLabel}</div>
             </div>
           </div>
         </div>
@@ -75,25 +90,12 @@ const cases = [
 
 <style>
   .cases-header {
-    opacity: 0;
-    transform: translateY(20px);
-    transition: all 0.6s ease-out;
-  }
-  
-  .cases-header.visible {
-    opacity: 1;
-    transform: translateY(0);
+    /* Visibility handled by GSAP */
   }
   
   .case-card {
-    opacity: 0;
-    transform: translateY(30px);
-    transition: all 0.5s ease-out, border-color 0.3s ease;
-  }
-  
-  .case-card.visible {
-    opacity: 1;
-    transform: translateY(0);
+    /* Removed opacity:0 - GSAP handles entrance */
+    transition: border-color 0.3s ease, transform 0.3s ease;
   }
   
   .case-card.active,
@@ -133,29 +135,11 @@ const cases = [
 
 <script>
   document.addEventListener('DOMContentLoaded', () => {
-    const header = document.querySelector('.cases-header');
     const cards = document.querySelectorAll('.case-card');
     let activeIndex = 0;
     let cycleInterval: ReturnType<typeof setInterval>;
     
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          if (entry.target.classList.contains('cases-header')) {
-            entry.target.classList.add('visible');
-          }
-          if (entry.target.classList.contains('case-card')) {
-            const index = parseInt((entry.target as HTMLElement).dataset.index || '0');
-            setTimeout(() => {
-              entry.target.classList.add('visible');
-            }, index * 150);
-          }
-        }
-      });
-    }, { threshold: 0.2 });
-    
-    if (header) observer.observe(header);
-    cards.forEach(card => observer.observe(card));
+    // Removed entrance observer - GSAP handles animations now
     
     // Auto-cycling for cases
     function cycleCases() {

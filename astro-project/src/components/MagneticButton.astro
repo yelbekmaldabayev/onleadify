@@ -1,0 +1,161 @@
+---
+
+---
+
+<script>
+  class MagneticEffect {
+    private elements: NodeListOf<Element>;
+    private bounds: Map<Element, DOMRect> = new Map();
+    
+    constructor() {
+      this.elements = document.querySelectorAll('[data-magnetic]');
+      this.init();
+    }
+    
+    private init() {
+      this.elements.forEach(el => {
+        this.updateBounds(el);
+        
+        el.addEventListener('mouseenter', () => this.updateBounds(el));
+        el.addEventListener('mousemove', (e) => this.handleMove(e as MouseEvent, el));
+        el.addEventListener('mouseleave', () => this.handleLeave(el));
+      });
+      
+      // Update bounds on scroll
+      window.addEventListener('scroll', () => {
+        this.elements.forEach(el => this.updateBounds(el));
+      }, { passive: true });
+    }
+    
+    private updateBounds(el: Element) {
+      this.bounds.set(el, el.getBoundingClientRect());
+    }
+    
+    private handleMove(e: MouseEvent, el: Element) {
+      const bounds = this.bounds.get(el);
+      if (!bounds) return;
+      
+      const strength = parseFloat((el as HTMLElement).dataset.magneticStrength || '0.3');
+      
+      const centerX = bounds.left + bounds.width / 2;
+      const centerY = bounds.top + bounds.height / 2;
+      
+      const deltaX = (e.clientX - centerX) * strength;
+      const deltaY = (e.clientY - centerY) * strength;
+      
+      (el as HTMLElement).style.transform = `translate(${deltaX}px, ${deltaY}px)`;
+      
+      // Also move inner content slightly more for depth
+      const inner = el.querySelector('[data-magnetic-inner]');
+      if (inner) {
+        const innerStrength = strength * 0.5;
+        (inner as HTMLElement).style.transform = `translate(${deltaX * innerStrength}px, ${deltaY * innerStrength}px)`;
+      }
+    }
+    
+    private handleLeave(el: Element) {
+      (el as HTMLElement).style.transform = 'translate(0, 0)';
+      
+      const inner = el.querySelector('[data-magnetic-inner]');
+      if (inner) {
+        (inner as HTMLElement).style.transform = 'translate(0, 0)';
+      }
+    }
+  }
+  
+  // Cursor glow effect (subtle glow only, no dot replacement)
+  class CursorGlow {
+    private cursor: HTMLDivElement;
+    private mouseX = 0;
+    private mouseY = 0;
+    private cursorX = 0;
+    private cursorY = 0;
+    
+    constructor() {
+      this.cursor = document.createElement('div');
+      this.cursor.className = 'cursor-glow';
+      document.body.appendChild(this.cursor);
+      this.init();
+    }
+    
+    private init() {
+      document.addEventListener('mousemove', (e) => {
+        this.mouseX = e.clientX;
+        this.mouseY = e.clientY;
+      });
+      
+      // Detect hoverable elements for glow expansion
+      const hoverables = document.querySelectorAll('a, button, [data-magnetic], .service-card, .advantage-card, .case-card, .stat-card');
+      hoverables.forEach(el => {
+        el.addEventListener('mouseenter', () => {
+          this.cursor.classList.add('hovering');
+        });
+        el.addEventListener('mouseleave', () => {
+          this.cursor.classList.remove('hovering');
+        });
+      });
+      
+      this.animate();
+    }
+    
+    private animate() {
+      // Smooth follow
+      const ease = 0.12;
+      this.cursorX += (this.mouseX - this.cursorX) * ease;
+      this.cursorY += (this.mouseY - this.cursorY) * ease;
+      
+      this.cursor.style.left = `${this.cursorX}px`;
+      this.cursor.style.top = `${this.cursorY}px`;
+      
+      requestAnimationFrame(() => this.animate());
+    }
+  }
+  
+  // Initialize on DOM ready
+  document.addEventListener('DOMContentLoaded', () => {
+    // Only on desktop
+    if (window.innerWidth > 1024 && !('ontouchstart' in window)) {
+      new MagneticEffect();
+      new CursorGlow();
+    }
+  });
+</script>
+
+<style is:global>
+  /* Magnetic elements transition */
+  [data-magnetic] {
+    transition: transform 0.3s cubic-bezier(0.33, 1, 0.68, 1);
+  }
+  
+  [data-magnetic-inner] {
+    transition: transform 0.3s cubic-bezier(0.33, 1, 0.68, 1);
+  }
+  
+  /* Cursor glow - subtle ambient light that follows cursor */
+  .cursor-glow {
+    position: fixed;
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9999;
+    transform: translate(-50%, -50%);
+    background: radial-gradient(circle, rgba(139, 92, 246, 0.08) 0%, transparent 70%);
+    transition: width 0.4s ease, height 0.4s ease, opacity 0.4s ease;
+    opacity: 0.6;
+  }
+  
+  .cursor-glow.hovering {
+    width: 400px;
+    height: 400px;
+    opacity: 0.9;
+    background: radial-gradient(circle, rgba(139, 92, 246, 0.12) 0%, transparent 70%);
+  }
+  
+  /* Hide on mobile/touch */
+  @media (max-width: 1024px), (hover: none) {
+    .cursor-glow {
+      display: none !important;
+    }
+  }
+</style>

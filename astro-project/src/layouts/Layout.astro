@@ -1,5 +1,11 @@
 ---
 import '../styles/globals.css'
+import ParticlesBackground from '../components/ParticlesBackground.astro'
+import MagneticButton from '../components/MagneticButton.astro'
+import ScrollReveal from '../components/ScrollReveal.astro'
+import SmoothScroll from '../components/SmoothScroll.astro'
+import GSAPAnimations from '../components/GSAPAnimations.astro'
+import GradientMesh from '../components/GradientMesh.astro'
 
 interface Props {
   title?: string
@@ -23,7 +29,13 @@ const { title = 'Onleadify — Веб-студия и автоматизация
 		<link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
 	</head>
 	<body class="min-h-screen bg-background text-foreground antialiased">
+		<GradientMesh />
+		<ParticlesBackground />
 		<slot />
+		<MagneticButton />
+		<ScrollReveal />
+		<SmoothScroll />
+		<GSAPAnimations />
 	</body>
 </html>
 

@@ -1,0 +1,180 @@
+---
+
+---
+
+<script>
+  import { gsap } from 'gsap';
+  import { ScrollTrigger } from 'gsap/ScrollTrigger';
+  
+  gsap.registerPlugin(ScrollTrigger);
+  
+  // Set default ease
+  gsap.defaults({ ease: 'power3.out' });
+  
+  document.addEventListener('DOMContentLoaded', () => {
+    // Ensure elements are visible first, then animate
+    gsap.set('.service-card, .advantage-card, .section-header, .whyus-header, .cta-card, .cases-header, .case-card, .about-left, .about-right, .stat-card', {
+      opacity: 1,
+      clearProps: 'transform'
+    });
+    
+    // Service cards with stagger - use fromTo for reliability
+    const serviceCards = gsap.utils.toArray('.service-card');
+    if (serviceCards.length) {
+      gsap.fromTo(serviceCards, 
+        { y: 60, opacity: 0 },
+        {
+          scrollTrigger: {
+            trigger: '.services-grid',
+            start: 'top 85%',
+            once: true
+          },
+          y: 0,
+          opacity: 1,
+          duration: 0.8,
+          stagger: 0.15
+        }
+      );
+    }
+    
+    // Section headers
+    gsap.utils.toArray('.section-header, .whyus-header').forEach((header: any) => {
+      gsap.fromTo(header,
+        { y: 40, opacity: 0 },
+        {
+          scrollTrigger: {
+            trigger: header,
+            start: 'top 88%',
+            once: true
+          },
+          y: 0,
+          opacity: 1,
+          duration: 0.8
+        }
+      );
+    });
+    
+    // Advantage cards
+    const advantageCards = gsap.utils.toArray('.advantage-card');
+    if (advantageCards.length) {
+      gsap.fromTo(advantageCards,
+        { y: 50, opacity: 0 },
+        {
+          scrollTrigger: {
+            trigger: '.whyus-grid',
+            start: 'top 85%',
+            once: true
+          },
+          y: 0,
+          opacity: 1,
+          duration: 0.7,
+          stagger: 0.1
+        }
+      );
+    }
+    
+    // CTA section
+    const ctaCard = document.querySelector('.cta-card');
+    if (ctaCard) {
+      gsap.fromTo(ctaCard,
+        { y: 50, opacity: 0 },
+        {
+          scrollTrigger: {
+            trigger: ctaCard,
+            start: 'top 85%',
+            once: true
+          },
+          y: 0,
+          opacity: 1,
+          duration: 0.8
+        }
+      );
+    }
+    
+    // About section - left side
+    const aboutLeft = document.querySelector('.about-left');
+    if (aboutLeft) {
+      gsap.fromTo(aboutLeft,
+        { x: -60, opacity: 0 },
+        {
+          scrollTrigger: {
+            trigger: '#about',
+            start: 'top 75%',
+            once: true
+          },
+          x: 0,
+          opacity: 1,
+          duration: 0.9
+        }
+      );
+    }
+    
+    // About section - right side (stat cards)
+    const statCards = gsap.utils.toArray('.stat-card');
+    if (statCards.length) {
+      gsap.fromTo(statCards,
+        { y: 40, opacity: 0, scale: 0.95 },
+        {
+          scrollTrigger: {
+            trigger: '#about',
+            start: 'top 70%',
+            once: true
+          },
+          y: 0,
+          scale: 1,
+          opacity: 1,
+          duration: 0.7,
+          stagger: 0.15,
+          ease: 'back.out(1.4)'
+        }
+      );
+    }
+    
+    // Cases header
+    const casesHeader = document.querySelector('.cases-header');
+    if (casesHeader) {
+      gsap.fromTo(casesHeader,
+        { y: 40, opacity: 0 },
+        {
+          scrollTrigger: {
+            trigger: casesHeader,
+            start: 'top 88%',
+            once: true
+          },
+          y: 0,
+          opacity: 1,
+          duration: 0.8
+        }
+      );
+    }
+    
+    // Case cards
+    const caseCards = gsap.utils.toArray('.case-card');
+    if (caseCards.length) {
+      gsap.fromTo(caseCards,
+        { y: 50, opacity: 0 },
+        {
+          scrollTrigger: {
+            trigger: '.cases-grid',
+            start: 'top 85%',
+            once: true
+          },
+          y: 0,
+          opacity: 1,
+          duration: 0.7,
+          stagger: 0.12
+        }
+      );
+    }
+    
+    // Magnetic hover effect enhancement
+    document.querySelectorAll('[data-magnetic]').forEach(el => {
+      el.addEventListener('mouseenter', () => {
+        gsap.to(el, { scale: 1.02, duration: 0.3 });
+      });
+      el.addEventListener('mouseleave', () => {
+        gsap.to(el, { scale: 1, duration: 0.3 });
+      });
+    });
+  });
+</script>
