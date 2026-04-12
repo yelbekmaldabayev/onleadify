@@ -1,0 +1,16 @@
+name: onleadify
+region: blr
+services:
+  - name: onleadify-astro-project
+    github:
+      repo: yelbekmaldabayev/onleadify
+      branch: main
+      deploy_on_push: true
+    build_command: npm run build
+    run_command: npx astro preview --host 0.0.0.0 --port 8080
+    environment_slug: node-js
+    instance_count: 1
+    instance_size_slug: basic-xxs
+    http_port: 8080
+    routes:
+      - path: /
