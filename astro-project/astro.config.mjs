@@ -8,6 +8,13 @@ export default defineConfig({
   server: {
     host: "0.0.0.0",
     port: 4321,
+    allowedHosts: [
+      "onleadify-4wpuq.ondigitalocean.app",
+      "onleadify.com",
+      "www.onleadify.com",
+      "localhost",
+      "127.0.0.1",
+    ],
   },
   vite: {
     preview: {
