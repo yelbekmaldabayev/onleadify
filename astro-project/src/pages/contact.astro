@@ -233,6 +233,10 @@ import Layout from '../layouts/Layout.astro';
     box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
   }
   
+  .form-input {
+    color: #0a0a0b;
+  }
+  
   .form-input:focus {
     border-color: rgba(120, 119, 198, 0.5);
     box-shadow: 0 0 0 3px rgba(120, 119, 198, 0.1);
@@ -323,28 +327,67 @@ import Layout from '../layouts/Layout.astro';
   document.addEventListener('DOMContentLoaded', () => {
     const form = document.getElementById('contact-form') as HTMLFormElement;
     const modal = document.getElementById('success-modal');
+    const submitBtn = form?.querySelector('button[type="submit"]') as HTMLButtonElement;
     
-    form?.addEventListener('submit', (e) => {
+    form?.addEventListener('submit', async (e) => {
       e.preventDefault();
+      
+      // Disable submit button
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = '<span class="relative z-10 flex items-center justify-center gap-2">Отправка...</span>';
+      }
       
       // Get form data
       const formData = new FormData(form);
       const data = {
         name: formData.get('name'),
         phone: formData.get('phone'),
-        telegram: formData.get('telegram')
+        telegram: formData.get('telegram'),
+        timestamp: new Date().toISOString(),
+        source: 'onleadify.com/contact'
       };
       
-      console.log('Form submitted:', data);
-      
-      // Show success modal
-      if (modal) {
-        modal.classList.remove('hidden');
-        modal.classList.add('flex');
+      try {
+        // Send to Make.com webhook
+        const webhookUrl = import.meta.env.PUBLIC_MAKE_WEBHOOK_URL;
+        
+        if (webhookUrl) {
+          const response = await fetch(webhookUrl, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data)
+          });
+          
+          if (!response.ok) {
+            throw new Error('Webhook request failed');
+          }
+          
+          console.log('Form submitted successfully:', data);
+        } else {
+          console.warn('Webhook URL not configured');
+        }
+        
+        // Show success modal
+        if (modal) {
+          modal.classList.remove('hidden');
+          modal.classList.add('flex');
+        }
+        
+        // Reset form
+        form.reset();
+      } catch (error) {
+        console.error('Error submitting form:', error);
+        alert('Произошла ошибка при отправке формы. Пожалуйста, попробуйте позже или напишите нам в WhatsApp.');
+      } finally {
+        // Re-enable submit button
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.innerHTML = '<span class="relative z-10 flex items-center justify-center gap-2">Отправить заявку<svg class="w-5 h-5 transition-transform group-hover:translate-x-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>';
+        }
       }
-      
-      // Reset form
-      form.reset();
     });
     
     // Phone input formatting
