@@ -9,5 +9,16 @@ export default defineConfig({
     host: "0.0.0.0",
     port: 4321,
   },
+  vite: {
+    preview: {
+      host: "0.0.0.0",
+      port: 8080,
+      allowedHosts: [
+        "onleadify-4wpuq.ondigitalocean.app",
+        "localhost",
+        "127.0.0.1",
+      ],
+    },
+  },
   integrations: [react(), tailwind()],
 });
