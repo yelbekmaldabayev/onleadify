@@ -11,7 +11,6 @@ export default defineConfig({
     allowedHosts: [
       "onleadify-4wpuq.ondigitalocean.app",
       "onleadify.com",
-      "www.onleadify.com",
       "localhost",
       "127.0.0.1",
     ],

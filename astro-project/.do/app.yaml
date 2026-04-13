@@ -1,5 +1,8 @@
 name: onleadify
 region: blr
+domains:
+  - domain: onleadify.com
+    type: PRIMARY
 services:
   - name: onleadify-astro-project
     github:
