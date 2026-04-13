@@ -15,6 +15,7 @@ export default defineConfig({
       port: 8080,
       allowedHosts: [
         "onleadify-4wpuq.ondigitalocean.app",
+        "onleadify.com",
         "localhost",
         "127.0.0.1",
       ],
