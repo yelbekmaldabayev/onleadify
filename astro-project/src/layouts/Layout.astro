@@ -9,9 +9,19 @@ import GradientMesh from '../components/GradientMesh.astro'
 
 interface Props {
   title?: string
+  description?: string
+  image?: string
+  type?: string
 }
 
-const { title = 'Onleadify — Веб-студия и автоматизация' } = Astro.props
+const { 
+  title = 'Onleadify — Веб-студия и автоматизация', 
+  description = 'Создаём системы, которые приводят клиентов. Веб-разработка и AI-автоматизация для бизнеса.',
+  image = '/logo.svg',
+  type = 'website'
+} = Astro.props
+
+const canonicalURL = new URL(Astro.url.pathname, 'https://onleadify.com')
 ---
 
 <!doctype html>
@@ -22,10 +32,63 @@ const { title = 'Onleadify — Веб-студия и автоматизация
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<link rel="icon" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
-		<meta name="description" content="Создаём системы, которые приводят клиентов. Веб-разработка и AI-автоматизация для бизнеса." />
-		<link rel="canonical" href={`https://onleadify.com${Astro.url.pathname}`} />
-		<meta name="robots" content="index, follow" />
+		
+		<!-- Primary Meta Tags -->
 		<title>{title}</title>
+		<meta name="title" content={title} />
+		<meta name="description" content={description} />
+		<meta name="keywords" content="веб-разработка, AI автоматизация, создание сайтов, лидогенерация, веб-студия, автоматизация бизнеса, разработка под ключ" />
+		<meta name="author" content="Onleadify" />
+		<link rel="canonical" href={canonicalURL} />
+		<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+		
+		<!-- Open Graph / Facebook -->
+		<meta property="og:type" content={type} />
+		<meta property="og:url" content={canonicalURL} />
+		<meta property="og:title" content={title} />
+		<meta property="og:description" content={description} />
+		<meta property="og:image" content={new URL(image, Astro.site)} />
+		<meta property="og:site_name" content="Onleadify" />
+		<meta property="og:locale" content="ru_RU" />
+		
+		<!-- Twitter -->
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:url" content={canonicalURL} />
+		<meta name="twitter:title" content={title} />
+		<meta name="twitter:description" content={description} />
+		<meta name="twitter:image" content={new URL(image, Astro.site)} />
+		
+		<!-- Additional SEO -->
+		<meta name="theme-color" content="#000000" />
+		<meta name="format-detection" content="telephone=no" />
+		
+		<!-- Structured Data (JSON-LD) -->
+		<script type="application/ld+json">
+			{
+				"@context": "https://schema.org",
+				"@type": "Organization",
+				"name": "Onleadify",
+				"url": "https://onleadify.com",
+				"logo": "https://onleadify.com/logo.svg",
+				"description": "Веб-студия и AI-автоматизация для бизнеса",
+				"sameAs": []
+			}
+		</script>
+		<script type="application/ld+json">
+			{
+				"@context": "https://schema.org",
+				"@type": "WebSite",
+				"name": "Onleadify",
+				"url": "https://onleadify.com",
+				"description": "Создаём системы, которые приводят клиентов. Веб-разработка и AI-автоматизация для бизнеса.",
+				"potentialAction": {
+					"@type": "SearchAction",
+					"target": "https://onleadify.com/?s={search_term_string}",
+					"query-input": "required name=search_term_string"
+				}
+			}
+		</script>
+		
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 		<link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
