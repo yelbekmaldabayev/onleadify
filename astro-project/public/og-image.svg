@@ -1,0 +1,87 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    @keyframes spinClockwise {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+    @keyframes spinCounterClockwise {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(-360deg); }
+    }
+    .white-orbit {
+      transform-origin: 200px 315px;
+      animation: spinClockwise 10s linear infinite;
+    }
+    .purple-orbit {
+      transform-origin: 200px 315px;
+      animation: spinCounterClockwise 8s linear infinite;
+    }
+  </style>
+  <defs>
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0a0a0a;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#1a1a2e;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="accentGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#7877c6;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#5b5a9e;stop-opacity:1" />
+    </linearGradient>
+    <filter id="glow-white" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="8" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <filter id="glow-purple" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="12" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <linearGradient id="logo-gradient" x1="80" y1="252" x2="320" y2="378" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#ffffff"/>
+      <stop offset="1" stop-color="#e4e4e7"/>
+    </linearGradient>
+    <linearGradient id="logo-gradient-2" x1="20" y1="315" x2="380" y2="315" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#a78bfa"/>
+      <stop offset="0.5" stop-color="#8b5cf6"/>
+      <stop offset="1" stop-color="#7c3aed"/>
+    </linearGradient>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="1200" height="630" fill="url(#bgGradient)"/>
+  
+  <!-- Grid pattern -->
+  <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+    <path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(120, 119, 198, 0.1)" stroke-width="1"/>
+  </pattern>
+  <rect width="1200" height="630" fill="url(#grid)"/>
+  
+  <!-- Glow effect behind logo -->
+  <circle cx="200" cy="315" r="120" fill="url(#accentGradient)" opacity="0.2" filter="blur(60px)"/>
+  
+  <!-- Animated Logo -->
+  <ellipse class="white-orbit" cx="200" cy="315" rx="105" ry="37.5" stroke="url(#logo-gradient)" stroke-width="15" fill="none" filter="url(#glow-white)" transform="rotate(60 200 315)"/>
+  <ellipse class="purple-orbit" cx="200" cy="315" rx="120" ry="45" stroke="url(#logo-gradient-2)" stroke-width="18.75" fill="none" filter="url(#glow-purple)" transform="rotate(-30 200 315)"/>
+  
+  <!-- Main text -->
+  <text x="380" y="280" font-family="Arial, sans-serif" font-size="72" font-weight="bold" fill="white">
+    Onleadify
+  </text>
+  
+  <!-- Subtitle -->
+  <text x="380" y="340" font-family="Arial, sans-serif" font-size="32" fill="rgba(255, 255, 255, 0.8)">
+    Веб-студия и AI-автоматизация
+  </text>
+  
+  <!-- Description -->
+  <text x="380" y="390" font-family="Arial, sans-serif" font-size="24" fill="rgba(255, 255, 255, 0.6)">
+    Создаём системы, которые приводят клиентов
+  </text>
+  
+  <!-- Bottom accent line -->
+  <rect x="380" y="420" width="600" height="4" fill="url(#accentGradient)" rx="2"/>
+</svg>
