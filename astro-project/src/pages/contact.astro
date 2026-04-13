@@ -340,10 +340,11 @@ import Layout from '../layouts/Layout.astro';
       
       // Get form data
       const formData = new FormData(form);
+      const telegramValue = formData.get('telegram') as string;
       const data = {
         name: formData.get('name'),
         phone: formData.get('phone'),
-        telegram: formData.get('telegram'),
+        telegram: telegramValue ? '@' + telegramValue.replace(/^@+/, '') : '',
         timestamp: new Date().toISOString(),
         source: 'onleadify.com/contact'
       };
@@ -388,6 +389,15 @@ import Layout from '../layouts/Layout.astro';
           submitBtn.innerHTML = '<span class="relative z-10 flex items-center justify-center gap-2">Отправить заявку<svg class="w-5 h-5 transition-transform group-hover:translate-x-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>';
         }
       }
+    });
+    
+    // Telegram input - prevent @ in input (it's shown as prefix)
+    const telegramInput = document.getElementById('telegram') as HTMLInputElement;
+    telegramInput?.addEventListener('input', (e) => {
+      let value = (e.target as HTMLInputElement).value;
+      // Remove any @ symbols that user might type
+      value = value.replace(/@/g, '');
+      (e.target as HTMLInputElement).value = value;
     });
     
     // Phone input formatting
