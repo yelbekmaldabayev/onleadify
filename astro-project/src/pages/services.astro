@@ -1,0 +1,79 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { Header } from '../components/Header';
+import Footer from '../components/Footer.astro';
+import CTA from '../components/CTA.astro';
+
+const services = [
+  {
+    title: "Веб-разработка",
+    description: "Создаём современные сайты и веб-приложения, которые работают на результат. От лендингов до сложных платформ.",
+    features: ["Лендинги и корпоративные сайты", "Веб-приложения", "E-commerce решения", "Интеграция с CRM"],
+    icon: "🌐"
+  },
+  {
+    title: "AI-автоматизация",
+    description: "Внедряем искусственный интеллект для автоматизации рутинных процессов и повышения эффективности бизнеса.",
+    features: ["Чат-боты с AI", "Автоматизация продаж", "Обработка заявок", "Интеллектуальная аналитика"],
+    icon: "🤖"
+  },
+  {
+    title: "CRM-интеграция",
+    description: "Настраиваем и интегрируем CRM-системы для эффективного управления клиентами и продажами.",
+    features: ["Настройка CRM", "Интеграция с сайтом", "Автоматизация воронки", "Аналитика и отчёты"],
+    icon: "📊"
+  },
+  {
+    title: "Лидогенерация",
+    description: "Создаём системы привлечения клиентов, которые работают на автопилоте и приносят стабильный поток заявок.",
+    features: ["Воронки продаж", "Автоворонки", "Email-маркетинг", "Ретаргетинг"],
+    icon: "🎯"
+  }
+];
+---
+
+<Layout 
+  title="Услуги — Onleadify | Веб-разработка, AI-автоматизация, CRM"
+  description="Профессиональные услуги веб-разработки, AI-автоматизации и CRM-интеграции. Создаём системы лидогенерации для роста вашего бизнеса."
+>
+  <main class="min-h-screen bg-background">
+    <Header client:load />
+    
+    <section class="pt-32 pb-16 sm:pb-24">
+      <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16">
+          <span class="inline-block text-xs font-medium text-muted-foreground uppercase tracking-widest mb-4">Услуги</span>
+          <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-6">
+            Решения для роста бизнеса
+          </h1>
+          <p class="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto">
+            Комплексные digital-решения, которые помогают компаниям масштабироваться и зарабатывать больше
+          </p>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          {services.map((service) => (
+            <div class="group rounded-2xl bg-card/50 backdrop-blur-sm border border-border/50 p-8 hover:border-purple-500/30 transition-all duration-300 hover:shadow-lg hover:shadow-purple-500/10">
+              <div class="text-4xl mb-4">{service.icon}</div>
+              <h2 class="text-2xl font-bold text-foreground mb-3">{service.title}</h2>
+              <p class="text-muted-foreground mb-6">{service.description}</p>
+              <ul class="space-y-2">
+                {service.features.map((feature) => (
+                  <li class="flex items-center gap-2 text-sm text-muted-foreground">
+                    <svg class="w-4 h-4 text-purple-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                    </svg>
+                    {feature}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+    
+    <CTA />
+    <Footer />
+  </main>
+</Layout>

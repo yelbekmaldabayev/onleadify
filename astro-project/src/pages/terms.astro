@@ -1,0 +1,68 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { Header } from '../components/Header';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout 
+  title="Условия использования — Onleadify"
+  description="Условия использования услуг Onleadify. Ознакомьтесь с правилами и условиями сотрудничества."
+>
+  <main class="min-h-screen bg-background">
+    <Header client:load />
+    
+    <section class="pt-32 pb-16 sm:pb-24">
+      <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+        <h1 class="text-3xl sm:text-4xl font-bold text-foreground mb-8">
+          Условия использования
+        </h1>
+        
+        <div class="prose prose-invert max-w-none space-y-6 text-muted-foreground">
+          <p class="text-lg">
+            Используя услуги Onleadify, вы соглашаетесь с настоящими условиями использования.
+          </p>
+          
+          <h2 class="text-xl font-bold text-foreground mt-8 mb-4">1. Общие положения</h2>
+          <p>
+            Onleadify предоставляет услуги веб-разработки, AI-автоматизации и digital-маркетинга 
+            для бизнеса. Все услуги предоставляются на основании индивидуальных договоров.
+          </p>
+          
+          <h2 class="text-xl font-bold text-foreground mt-8 mb-4">2. Услуги</h2>
+          <p>
+            Мы предлагаем следующие услуги:
+          </p>
+          <ul class="list-disc pl-6 space-y-2">
+            <li>Разработка веб-сайтов и веб-приложений</li>
+            <li>AI-автоматизация бизнес-процессов</li>
+            <li>Интеграция CRM-систем</li>
+            <li>Создание систем лидогенерации</li>
+            <li>Техническая поддержка и сопровождение</li>
+          </ul>
+          
+          <h2 class="text-xl font-bold text-foreground mt-8 mb-4">3. Оплата</h2>
+          <p>
+            Условия оплаты определяются индивидуально для каждого проекта и фиксируются в договоре.
+          </p>
+          
+          <h2 class="text-xl font-bold text-foreground mt-8 mb-4">4. Интеллектуальная собственность</h2>
+          <p>
+            После полной оплаты все права на разработанные материалы переходят к заказчику, 
+            если иное не указано в договоре.
+          </p>
+          
+          <h2 class="text-xl font-bold text-foreground mt-8 mb-4">5. Контакты</h2>
+          <p>
+            По всем вопросам обращайтесь: <a href="mailto:info@onleadify.com" class="text-purple-400 hover:underline">info@onleadify.com</a>
+          </p>
+          
+          <p class="text-sm text-muted-foreground/70 mt-12">
+            Последнее обновление: Апрель 2026
+          </p>
+        </div>
+      </div>
+    </section>
+    
+    <Footer />
+  </main>
+</Layout>

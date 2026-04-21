@@ -8,21 +8,48 @@
   
   gsap.registerPlugin(ScrollTrigger);
   
-  // Set default ease
-  gsap.defaults({ ease: 'power3.out' });
+  // Check if mobile for reduced animations
+  const isMobile = window.matchMedia('(max-width: 768px)').matches;
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  
+  // Set default ease and optimize for performance
+  gsap.defaults({ 
+    ease: 'power2.out',
+    force3D: true,
+  });
+  
+  // Configure ScrollTrigger for better performance
+  ScrollTrigger.config({
+    limitCallbacks: true,
+    ignoreMobileResize: true,
+  });
   
   document.addEventListener('DOMContentLoaded', () => {
+    // Skip animations if user prefers reduced motion
+    if (prefersReducedMotion) {
+      gsap.set('.service-card, .advantage-card, .section-header, .whyus-header, .cta-card, .cases-header, .case-card, .about-left, .about-right, .stat-card, .testimonial-card', {
+        opacity: 1,
+        clearProps: 'all'
+      });
+      return;
+    }
+    
+    // Reduced animation values for mobile
+    const animDistance = isMobile ? 30 : 60;
+    const animDuration = isMobile ? 0.5 : 0.8;
+    const staggerDelay = isMobile ? 0.08 : 0.15;
+    
     // Ensure elements are visible first, then animate
-    gsap.set('.service-card, .advantage-card, .section-header, .whyus-header, .cta-card, .cases-header, .case-card, .about-left, .about-right, .stat-card', {
+    gsap.set('.service-card, .advantage-card, .section-header, .whyus-header, .cta-card, .cases-header, .case-card, .about-left, .about-right, .stat-card, .testimonial-card', {
       opacity: 1,
       clearProps: 'transform'
     });
     
-    // Service cards with stagger - use fromTo for reliability
+    // Service cards with stagger
     const serviceCards = gsap.utils.toArray('.service-card');
     if (serviceCards.length) {
       gsap.fromTo(serviceCards, 
-        { y: 60, opacity: 0 },
+        { y: animDistance, opacity: 0 },
         {
           scrollTrigger: {
             trigger: '.services-grid',
@@ -31,16 +58,16 @@
           },
           y: 0,
           opacity: 1,
-          duration: 0.8,
-          stagger: 0.15
+          duration: animDuration,
+          stagger: staggerDelay
         }
       );
     }
     
     // Section headers
-    gsap.utils.toArray('.section-header, .whyus-header').forEach((header: any) => {
+    gsap.utils.toArray('.section-header, .whyus-header, .testimonials-header').forEach((header: any) => {
       gsap.fromTo(header,
-        { y: 40, opacity: 0 },
+        { y: animDistance * 0.6, opacity: 0 },
         {
           scrollTrigger: {
             trigger: header,
@@ -49,7 +76,7 @@
           },
           y: 0,
           opacity: 1,
-          duration: 0.8
+          duration: animDuration
         }
       );
     });
@@ -58,7 +85,7 @@
     const advantageCards = gsap.utils.toArray('.advantage-card');
     if (advantageCards.length) {
       gsap.fromTo(advantageCards,
-        { y: 50, opacity: 0 },
+        { y: animDistance * 0.8, opacity: 0 },
         {
           scrollTrigger: {
             trigger: '.whyus-grid',
@@ -67,8 +94,27 @@
           },
           y: 0,
           opacity: 1,
-          duration: 0.7,
-          stagger: 0.1
+          duration: animDuration * 0.9,
+          stagger: staggerDelay * 0.7
+        }
+      );
+    }
+    
+    // Testimonial cards
+    const testimonialCards = gsap.utils.toArray('.testimonial-card');
+    if (testimonialCards.length) {
+      gsap.fromTo(testimonialCards,
+        { y: animDistance * 0.7, opacity: 0 },
+        {
+          scrollTrigger: {
+            trigger: '.testimonials-grid',
+            start: 'top 85%',
+            once: true
+          },
+          y: 0,
+          opacity: 1,
+          duration: animDuration,
+          stagger: staggerDelay
         }
       );
     }
@@ -77,7 +123,7 @@
     const ctaCard = document.querySelector('.cta-card');
     if (ctaCard) {
       gsap.fromTo(ctaCard,
-        { y: 50, opacity: 0 },
+        { y: animDistance * 0.8, opacity: 0 },
         {
           scrollTrigger: {
             trigger: ctaCard,
@@ -86,7 +132,7 @@
           },
           y: 0,
           opacity: 1,
-          duration: 0.8
+          duration: animDuration
         }
       );
     }
@@ -95,7 +141,7 @@
     const aboutLeft = document.querySelector('.about-left');
     if (aboutLeft) {
       gsap.fromTo(aboutLeft,
-        { x: -60, opacity: 0 },
+        { x: isMobile ? 0 : -animDistance, y: isMobile ? animDistance * 0.5 : 0, opacity: 0 },
         {
           scrollTrigger: {
             trigger: '#about',
@@ -103,8 +149,9 @@
             once: true
           },
           x: 0,
+          y: 0,
           opacity: 1,
-          duration: 0.9
+          duration: animDuration * 1.1
         }
       );
     }
@@ -113,7 +160,7 @@
     const statCards = gsap.utils.toArray('.stat-card');
     if (statCards.length) {
       gsap.fromTo(statCards,
-        { y: 40, opacity: 0, scale: 0.95 },
+        { y: animDistance * 0.6, opacity: 0, scale: isMobile ? 1 : 0.95 },
         {
           scrollTrigger: {
             trigger: '#about',
@@ -123,9 +170,9 @@
           y: 0,
           scale: 1,
           opacity: 1,
-          duration: 0.7,
-          stagger: 0.15,
-          ease: 'back.out(1.4)'
+          duration: animDuration * 0.9,
+          stagger: staggerDelay,
+          ease: isMobile ? 'power2.out' : 'back.out(1.4)'
         }
       );
     }
@@ -134,7 +181,7 @@
     const casesHeader = document.querySelector('.cases-header');
     if (casesHeader) {
       gsap.fromTo(casesHeader,
-        { y: 40, opacity: 0 },
+        { y: animDistance * 0.6, opacity: 0 },
         {
           scrollTrigger: {
             trigger: casesHeader,
@@ -143,7 +190,7 @@
           },
           y: 0,
           opacity: 1,
-          duration: 0.8
+          duration: animDuration
         }
       );
     }
@@ -152,7 +199,7 @@
     const caseCards = gsap.utils.toArray('.case-card');
     if (caseCards.length) {
       gsap.fromTo(caseCards,
-        { y: 50, opacity: 0 },
+        { y: animDistance * 0.8, opacity: 0 },
         {
           scrollTrigger: {
             trigger: '.cases-grid',
@@ -161,20 +208,22 @@
           },
           y: 0,
           opacity: 1,
-          duration: 0.7,
-          stagger: 0.12
+          duration: animDuration * 0.9,
+          stagger: staggerDelay * 0.8
         }
       );
     }
     
-    // Magnetic hover effect enhancement
-    document.querySelectorAll('[data-magnetic]').forEach(el => {
-      el.addEventListener('mouseenter', () => {
-        gsap.to(el, { scale: 1.02, duration: 0.3 });
+    // Magnetic hover effect - only on desktop
+    if (!isMobile) {
+      document.querySelectorAll('[data-magnetic]').forEach(el => {
+        el.addEventListener('mouseenter', () => {
+          gsap.to(el, { scale: 1.02, duration: 0.3 });
+        });
+        el.addEventListener('mouseleave', () => {
+          gsap.to(el, { scale: 1, duration: 0.3 });
+        });
       });
-      el.addEventListener('mouseleave', () => {
-        gsap.to(el, { scale: 1, duration: 0.3 });
-      });
-    });
+    }
   });
 </script>

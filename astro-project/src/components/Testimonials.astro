@@ -1,0 +1,191 @@
+---
+const testimonials = [
+  {
+    name: "Сапармурат Музапаров",
+    position: "CEO / Founder",
+    company: "VeeLog",
+    text: "Команда Onleadify разработала платформу VeeLog на высшем уровне. В начале у нас не было чёткого понимания, с чего начать и как выстроить процесс, но вместе с Onleadify мы смогли структурировать идею и успешно реализовать проект.",
+    rating: 5,
+  },
+  {
+    name: "Жазира",
+    position: "Основатель",
+    company: "Jazira.kz",
+    text: "Onleadify создали для нас стильный и современный сайт, полностью отражающий нашу нишу. Теперь клиенты с интересом изучают лендинг и лучше понимают, какие услуги мы предоставляем.",
+    rating: 5,
+  },
+  {
+    name: "Болат Сейіт",
+    position: "Предприниматель",
+    company: "",
+    text: "Onleadify автоматизировали наши продажи и внедрили CRM-систему для работы с клиентами. Результат превзошёл ожидания — процессы стали быстрее, прозрачнее и эффективнее.",
+    rating: 5,
+  },
+]
+---
+
+<section id="testimonials" class="py-16 sm:py-24 bg-background relative overflow-hidden">
+  <!-- Animated gradient orbs -->
+  <div class="testimonial-orb testimonial-orb-1"></div>
+  <div class="testimonial-orb testimonial-orb-2"></div>
+  
+  <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 relative z-10">
+    <div class="text-center mb-12 sm:mb-16 testimonials-header">
+      <span class="inline-block text-xs font-medium text-muted-foreground uppercase tracking-widest mb-3 sm:mb-4">Отзывы</span>
+      <h2 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-4">
+        Что говорят наши клиенты
+      </h2>
+      <p class="text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto">
+        Реальные отзывы от компаний, с которыми мы работали
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 testimonials-grid">
+      {testimonials.map((testimonial, idx) => (
+        <div
+          class="testimonial-card group rounded-2xl bg-card/50 backdrop-blur-sm border border-border/50 p-6 sm:p-8 hover:border-purple-500/30 transition-all duration-500 hover:shadow-lg hover:shadow-purple-500/10 relative overflow-hidden"
+          data-index={idx}
+        >
+          <!-- Shine effect on hover -->
+          <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none">
+            <div class="absolute inset-0 bg-gradient-to-br from-purple-500/5 via-transparent to-transparent"></div>
+          </div>
+          
+          <!-- Quote icon -->
+          <div class="mb-4 sm:mb-6">
+            <svg class="w-8 h-8 sm:w-10 sm:h-10 text-purple-500/30 group-hover:text-purple-500/50 transition-colors duration-300" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M6.5 10c-.223 0-.437.034-.65.065.069-.232.14-.468.254-.68.114-.308.292-.575.469-.844.148-.291.409-.488.601-.737.201-.242.475-.403.692-.604.213-.21.492-.315.714-.463.232-.133.434-.28.65-.35l.539-.222.474-.197-.485-1.938-.597.144c-.191.048-.424.104-.689.171-.271.05-.56.187-.882.312-.318.142-.686.238-1.028.466-.344.218-.741.4-1.091.692-.339.301-.748.562-1.05.945-.33.358-.656.734-.909 1.162-.293.408-.492.856-.702 1.299-.19.443-.343.896-.468 1.336-.237.882-.343 1.72-.384 2.437-.034.718-.014 1.315.028 1.747.015.204.043.402.063.539l.025.168.026-.006A4.5 4.5 0 1 0 6.5 10zm11 0c-.223 0-.437.034-.65.065.069-.232.14-.468.254-.68.114-.308.292-.575.469-.844.148-.291.409-.488.601-.737.201-.242.475-.403.692-.604.213-.21.492-.315.714-.463.232-.133.434-.28.65-.35l.539-.222.474-.197-.485-1.938-.597.144c-.191.048-.424.104-.689.171-.271.05-.56.187-.882.312-.317.143-.686.238-1.028.467-.344.218-.741.4-1.091.692-.339.301-.748.562-1.05.944-.33.358-.656.734-.909 1.162-.293.408-.492.856-.702 1.299-.19.443-.343.896-.468 1.336-.237.882-.343 1.72-.384 2.437-.034.718-.014 1.315.028 1.747.015.204.043.402.063.539l.025.168.026-.006A4.5 4.5 0 1 0 17.5 10z"/>
+            </svg>
+          </div>
+
+          <!-- Rating stars -->
+          <div class="flex gap-1 mb-4">
+            {Array.from({ length: testimonial.rating }).map(() => (
+              <svg class="w-4 h-4 sm:w-5 sm:h-5 text-yellow-500" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+              </svg>
+            ))}
+          </div>
+
+          <!-- Testimonial text -->
+          <p class="text-sm sm:text-base text-muted-foreground leading-relaxed mb-6 sm:mb-8">
+            "{testimonial.text}"
+          </p>
+
+          <!-- Author info -->
+          <div class="mt-auto pt-6 border-t border-border/30">
+            <div class="flex items-center justify-between">
+              <div>
+                <div class="font-semibold text-sm sm:text-base text-foreground">
+                  {testimonial.name}
+                </div>
+                <div class="text-xs sm:text-sm text-muted-foreground mt-0.5">
+                  {testimonial.position}{testimonial.company && <span class="text-purple-400/70"> · {testimonial.company}</span>}
+                </div>
+              </div>
+              <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-purple-500/10 to-purple-600/10 flex items-center justify-center border border-purple-500/20 group-hover:border-purple-500/40 group-hover:from-purple-500/20 group-hover:to-purple-600/20 transition-all duration-300">
+                <svg class="w-4 h-4 text-purple-400/60 group-hover:text-purple-400 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                </svg>
+              </div>
+            </div>
+          </div>
+
+          <!-- Decorative corner accent -->
+          <div class="absolute top-0 right-0 w-20 h-20 bg-gradient-to-br from-purple-500/5 to-transparent rounded-bl-full opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+        </div>
+      ))}
+    </div>
+
+    <!-- Trust indicators -->
+    <div class="mt-12 sm:mt-16 text-center trust-indicators">
+      <div class="inline-flex flex-wrap items-center justify-center gap-4 sm:gap-8 text-sm text-muted-foreground">
+        <div class="flex items-center gap-2">
+          <svg class="w-5 h-5 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+          </svg>
+          <span>Проверенные отзывы</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <svg class="w-5 h-5 text-purple-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+          </svg>
+          <span>Быстрая реализация</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <svg class="w-5 h-5 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+          </svg>
+          <span>Поддержка 24/7</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .testimonial-orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(100px);
+    pointer-events: none;
+    opacity: 0.3;
+  }
+  
+  .testimonial-orb-1 {
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, rgba(139, 92, 246, 0.25) 0%, transparent 70%);
+    top: -150px;
+    left: -150px;
+    animation: orbFloat1 20s ease-in-out infinite;
+  }
+  
+  .testimonial-orb-2 {
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(120, 119, 198, 0.2) 0%, transparent 70%);
+    bottom: -100px;
+    right: -100px;
+    animation: orbFloat2 18s ease-in-out infinite;
+  }
+  
+  @keyframes orbFloat1 {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    33% { transform: translate(50px, -30px) scale(1.1); }
+    66% { transform: translate(-30px, 40px) scale(0.9); }
+  }
+  
+  @keyframes orbFloat2 {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    50% { transform: translate(-40px, 30px) scale(1.15); }
+  }
+  
+  .testimonial-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .testimonial-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.03), transparent);
+    transition: left 0.6s ease;
+  }
+  
+  .testimonial-card:hover::before {
+    left: 100%;
+  }
+  
+  @media (max-width: 768px) {
+    .testimonials-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+

@@ -1,16 +1,19 @@
 ---
 const footerLinks = {
   services: [
-    { href: "#", label: "Веб-разработка" },
-    { href: "#", label: "AI-чатботы" },
-    { href: "#", label: "CRM-системы" },
-    { href: "#", label: "Автоматизация" },
+    { href: "/services", label: "Веб-разработка" },
+    { href: "/services", label: "AI-автоматизация" },
+    { href: "/services", label: "CRM-системы" },
+    { href: "/services", label: "Лидогенерация" },
   ],
   company: [
-    { href: "#about", label: "О компании" },
-    { href: "#cases", label: "Кейсы" },
-    { href: "#", label: "Блог" },
-    { href: "#contact", label: "Контакты" },
+    { href: "/about", label: "О компании" },
+    { href: "/cases", label: "Кейсы" },
+    { href: "/contact", label: "Контакты" },
+  ],
+  legal: [
+    { href: "/privacy", label: "Политика конфиденциальности" },
+    { href: "/terms", label: "Условия использования" },
   ],
 }
 ---
@@ -117,12 +120,11 @@ const footerLinks = {
         © 2026 Onleadify. Все права защищены.
       </p>
       <div class="flex flex-col sm:flex-row items-center gap-4 sm:gap-8">
-        <a href="#" class="text-sm text-muted-foreground hover:text-foreground transition-colors">
-          Политика конфиденциальности
-        </a>
-        <a href="#" class="text-sm text-muted-foreground hover:text-foreground transition-colors">
-          Оферта
-        </a>
+        {footerLinks.legal.map((link) => (
+          <a href={link.href} class="text-sm text-muted-foreground hover:text-foreground transition-colors">
+            {link.label}
+          </a>
+        ))}
       </div>
     </div>
   </div>

@@ -1,0 +1,102 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { Header } from '../components/Header';
+import Footer from '../components/Footer.astro';
+import CTA from '../components/CTA.astro';
+import veelogImage from '../assets/Veelog_net.png';
+import jaziraImage from '../assets/jazira_kz.png';
+import oracleCareImage from '../assets/oracle_care_framer.png';
+
+const cases = [
+  {
+    title: "VeeLog",
+    category: "Веб-приложение",
+    result: "Автоматизация",
+    resultLabel: "процессов для логистов и водителей",
+    description: "Онлайн-платформа для организации грузоперевозок, которая соединяет людей, которым нужно перевезти груз, с логистами и водителями, готовыми выполнить доставку.",
+    image: veelogImage,
+    tags: ["React", "Node.js", "PostgreSQL"]
+  },
+  {
+    title: "Jazira.kz",
+    category: "Лендинг",
+    result: "120+ клиентов",
+    resultLabel: "привлечено через лендинг",
+    description: "Лендинг для психолога по сопровождению подростков и родителей. Современный дизайн с фокусом на конверсию.",
+    image: jaziraImage,
+    tags: ["Astro", "TailwindCSS", "SEO"]
+  },
+  {
+    title: "Oracle Care",
+    category: "Веб-сайт + CRM",
+    result: "Оптимизация",
+    resultLabel: "времени внутренних процессов",
+    description: "Веб-сайт с интеграцией с CRM, автоответчиком и чат-ботом для бронирования клиентов.",
+    image: oracleCareImage,
+    tags: ["CRM", "Чат-бот", "Автоматизация"]
+  }
+];
+---
+
+<Layout 
+  title="Кейсы — Onleadify | Портфолио проектов веб-разработки"
+  description="Узнайте, как мы помогли компаниям оптимизировать процессы и увеличить продажи. Реальные кейсы веб-разработки и автоматизации."
+>
+  <main class="min-h-screen bg-background">
+    <Header client:load />
+    
+    <section class="pt-32 pb-16 sm:pb-24">
+      <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16">
+          <span class="inline-block text-xs font-medium text-muted-foreground uppercase tracking-widest mb-4">Портфолио</span>
+          <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-6">
+            Наши кейсы
+          </h1>
+          <p class="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto">
+            Узнайте, как мы помогли компаниям оптимизировать процессы и увеличить продажи
+          </p>
+        </div>
+        
+        <div class="space-y-12">
+          {cases.map((caseItem, idx) => (
+            <div class="group rounded-2xl bg-card/50 backdrop-blur-sm border border-border/50 overflow-hidden hover:border-purple-500/30 transition-all duration-300">
+              <div class="grid md:grid-cols-2 gap-0">
+                <div class="aspect-video bg-secondary flex items-center justify-center overflow-hidden">
+                  {caseItem.image ? (
+                    <img 
+                      src={caseItem.image.src} 
+                      alt={caseItem.title}
+                      class="w-full h-full object-contain transition-transform duration-500 group-hover:scale-105"
+                      loading="lazy"
+                    />
+                  ) : (
+                    <div class="text-7xl font-bold text-muted-foreground/20">
+                      {String(idx + 1).padStart(2, '0')}
+                    </div>
+                  )}
+                </div>
+                <div class="p-8 flex flex-col justify-center">
+                  <span class="text-xs text-purple-400 uppercase tracking-wider mb-2">{caseItem.category}</span>
+                  <h2 class="text-2xl sm:text-3xl font-bold text-foreground mb-3">{caseItem.title}</h2>
+                  <p class="text-muted-foreground mb-6">{caseItem.description}</p>
+                  <div class="mb-6">
+                    <div class="text-3xl font-bold text-foreground">{caseItem.result}</div>
+                    <div class="text-sm text-muted-foreground">{caseItem.resultLabel}</div>
+                  </div>
+                  <div class="flex flex-wrap gap-2">
+                    {caseItem.tags.map((tag) => (
+                      <span class="px-3 py-1 text-xs rounded-full bg-secondary text-muted-foreground">{tag}</span>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+    
+    <CTA />
+    <Footer />
+  </main>
+</Layout>

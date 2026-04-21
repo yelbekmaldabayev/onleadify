@@ -1,0 +1,63 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { Header } from '../components/Header';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout 
+  title="Политика конфиденциальности — Onleadify"
+  description="Политика конфиденциальности Onleadify. Узнайте, как мы обрабатываем и защищаем ваши персональные данные."
+>
+  <main class="min-h-screen bg-background">
+    <Header client:load />
+    
+    <section class="pt-32 pb-16 sm:pb-24">
+      <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+        <h1 class="text-3xl sm:text-4xl font-bold text-foreground mb-8">
+          Политика конфиденциальности
+        </h1>
+        
+        <div class="prose prose-invert max-w-none space-y-6 text-muted-foreground">
+          <p class="text-lg">
+            Данная Политика конфиденциальности описывает, как Onleadify собирает, использует и защищает информацию, 
+            которую вы предоставляете при использовании нашего веб-сайта.
+          </p>
+          
+          <h2 class="text-xl font-bold text-foreground mt-8 mb-4">1. Сбор информации</h2>
+          <p>
+            Мы собираем информацию, которую вы добровольно предоставляете нам через формы обратной связи, 
+            включая имя, адрес электронной почты и номер телефона.
+          </p>
+          
+          <h2 class="text-xl font-bold text-foreground mt-8 mb-4">2. Использование информации</h2>
+          <p>
+            Собранная информация используется для:
+          </p>
+          <ul class="list-disc pl-6 space-y-2">
+            <li>Связи с вами по вопросам наших услуг</li>
+            <li>Улучшения качества обслуживания</li>
+            <li>Отправки информационных материалов (с вашего согласия)</li>
+          </ul>
+          
+          <h2 class="text-xl font-bold text-foreground mt-8 mb-4">3. Защита данных</h2>
+          <p>
+            Мы принимаем все необходимые меры для защиты ваших персональных данных от несанкционированного доступа, 
+            изменения, раскрытия или уничтожения.
+          </p>
+          
+          <h2 class="text-xl font-bold text-foreground mt-8 mb-4">4. Контакты</h2>
+          <p>
+            Если у вас есть вопросы относительно данной политики конфиденциальности, 
+            свяжитесь с нами по адресу: <a href="mailto:info@onleadify.com" class="text-purple-400 hover:underline">info@onleadify.com</a>
+          </p>
+          
+          <p class="text-sm text-muted-foreground/70 mt-12">
+            Последнее обновление: Апрель 2026
+          </p>
+        </div>
+      </div>
+    </section>
+    
+    <Footer />
+  </main>
+</Layout>

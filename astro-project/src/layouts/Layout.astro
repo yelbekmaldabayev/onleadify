@@ -15,13 +15,14 @@ interface Props {
 }
 
 const { 
-  title = 'Onleadify — Веб-студия и AI-автоматизация | Создание сайтов и автоматизация бизнеса', 
-  description = 'Профессиональная веб-разработка и AI-автоматизация для бизнеса. Создаём системы лидогенерации, которые реально приводят клиентов. Разработка сайтов под ключ, автоматизация процессов.',
-  image = '/og-image.svg',
+  title = 'Onleadify — Веб-студия и AI-автоматизация | Создание сайтов в Казахстане', 
+  description = 'Мы строим системы, которые растят ваш бизнес. Программное обеспечение, AI и автоматизация для компаний, которые хотят масштабироваться. От генерации лидов до кастомных платформ.',
+  image = '/og-image.png',
   type = 'website'
 } = Astro.props
 
 const canonicalURL = new URL(Astro.url.pathname, 'https://onleadify.com')
+const currentPath = Astro.url.pathname
 ---
 
 <!doctype html>
@@ -80,74 +81,112 @@ const canonicalURL = new URL(Astro.url.pathname, 'https://onleadify.com')
 		<meta name="msapplication-TileColor" content="#7877c6" />
 		<meta name="msapplication-config" content="/browserconfig.xml" />
 		
-		<!-- Structured Data (JSON-LD) -->
-		<script type="application/ld+json">
-			{
-				"@context": "https://schema.org",
-				"@type": "ProfessionalService",
-				"@id": "https://onleadify.com/#organization",
-				"name": "Onleadify",
-				"alternateName": "Онлидифай",
-				"url": "https://onleadify.com",
-				"logo": {
-					"@type": "ImageObject",
-					"url": "https://onleadify.com/logo.svg",
-					"width": "512",
-					"height": "512"
+		<!-- Structured Data (JSON-LD) - Organization -->
+		<script type="application/ld+json" set:html={JSON.stringify({
+			"@context": "https://schema.org",
+			"@type": "Organization",
+			"@id": "https://onleadify.com/#organization",
+			"name": "Onleadify",
+			"alternateName": ["Онлидифай", "Onleadify.com"],
+			"url": "https://onleadify.com",
+			"logo": {
+				"@type": "ImageObject",
+				"url": "https://onleadify.com/logo.svg",
+				"width": "512",
+				"height": "512"
+			},
+			"image": "https://onleadify.com/og-image.png",
+			"description": "Мы строим системы, которые растят ваш бизнес. Программное обеспечение, AI и автоматизация для компаний в Казахстане.",
+			"slogan": "Мы строим системы, которые растят ваш бизнес",
+			"email": "info@onleadify.com",
+			"address": {
+				"@type": "PostalAddress",
+				"addressCountry": "KZ",
+				"addressLocality": "Казахстан"
+			},
+			"areaServed": [
+				{ "@type": "Country", "name": "Казахстан" },
+				{ "@type": "Country", "name": "Россия" }
+			],
+			"knowsAbout": ["Веб-разработка", "AI-автоматизация", "Лидогенерация", "CRM интеграция", "Чат-боты"],
+			"sameAs": []
+		})} />
+		
+		<!-- Structured Data (JSON-LD) - WebSite with Sitelinks Search -->
+		<script type="application/ld+json" set:html={JSON.stringify({
+			"@context": "https://schema.org",
+			"@type": "WebSite",
+			"@id": "https://onleadify.com/#website",
+			"name": "Onleadify",
+			"alternateName": "Онлидифай",
+			"url": "https://onleadify.com",
+			"description": "Мы строим системы, которые растят ваш бизнес. Веб-разработка и AI-автоматизация.",
+			"publisher": { "@id": "https://onleadify.com/#organization" },
+			"inLanguage": "ru-RU"
+		})} />
+		
+		<!-- Structured Data (JSON-LD) - SiteNavigationElement for Sitelinks -->
+		<script type="application/ld+json" set:html={JSON.stringify({
+			"@context": "https://schema.org",
+			"@type": "ItemList",
+			"itemListElement": [
+				{
+					"@type": "SiteNavigationElement",
+					"position": 1,
+					"name": "Услуги",
+					"description": "Решения для роста маркетинговых, креативных и IT компаний",
+					"url": "https://onleadify.com/services"
 				},
-				"image": "https://onleadify.com/og-image.svg",
-				"description": "Профессиональная веб-разработка и AI-автоматизация для бизнеса. Создаём системы лидогенерации, которые реально приводят клиентов.",
-				"slogan": "Создаём системы, которые приводят клиентов",
-				"priceRange": "$$",
-				"telephone": "+7",
-				"email": "info@onleadify.com",
-				"address": {
-					"@type": "PostalAddress",
-					"addressCountry": "KZ",
-					"addressLocality": "Казахстан"
+				{
+					"@type": "SiteNavigationElement",
+					"position": 2,
+					"name": "Кейсы",
+					"description": "Узнайте, как мы помогли компаниям оптимизировать процессы",
+					"url": "https://onleadify.com/cases"
 				},
-				"areaServed": [
-					{
-						"@type": "Country",
-						"name": "Казахстан"
-					},
-					{
-						"@type": "Country",
-						"name": "Россия"
-					}
-				],
-				"serviceType": [
-					"Веб-разработка",
-					"AI-автоматизация",
-					"Создание сайтов",
-					"Лидогенерация",
-					"CRM интеграция",
-					"Разработка чат-ботов"
-				],
-				"knowsAbout": [
-					"Web Development",
-					"AI Automation",
-					"Lead Generation",
-					"CRM Integration",
-					"Chatbot Development"
-				],
-				"sameAs": []
-			}
-		</script>
-		<script type="application/ld+json">
-			{
-				"@context": "https://schema.org",
-				"@type": "WebSite",
-				"name": "Onleadify",
-				"url": "https://onleadify.com",
-				"description": "Создаём системы, которые приводят клиентов. Веб-разработка и AI-автоматизация для бизнеса.",
-				"potentialAction": {
-					"@type": "SearchAction",
-					"target": "https://onleadify.com/?s={search_term_string}",
-					"query-input": "required name=search_term_string"
+				{
+					"@type": "SiteNavigationElement",
+					"position": 3,
+					"name": "О нас",
+					"description": "Команда экспертов в digital-решениях",
+					"url": "https://onleadify.com/about"
+				},
+				{
+					"@type": "SiteNavigationElement",
+					"position": 4,
+					"name": "Контакты",
+					"description": "Свяжитесь с нами для консультации",
+					"url": "https://onleadify.com/contact"
+				},
+				{
+					"@type": "SiteNavigationElement",
+					"position": 5,
+					"name": "Условия использования",
+					"description": "Правила и условия сотрудничества",
+					"url": "https://onleadify.com/terms"
+				},
+				{
+					"@type": "SiteNavigationElement",
+					"position": 6,
+					"name": "Политика конфиденциальности",
+					"description": "Как мы обрабатываем ваши данные",
+					"url": "https://onleadify.com/privacy"
 				}
-			}
-		</script>
+			]
+		})} />
+		
+		<!-- Structured Data (JSON-LD) - ProfessionalService -->
+		<script type="application/ld+json" set:html={JSON.stringify({
+			"@context": "https://schema.org",
+			"@type": "ProfessionalService",
+			"@id": "https://onleadify.com/#service",
+			"name": "Onleadify",
+			"url": "https://onleadify.com",
+			"priceRange": "$$",
+			"serviceType": ["Веб-разработка", "AI-автоматизация", "Создание сайтов", "Лидогенерация", "CRM интеграция"],
+			"areaServed": { "@type": "Country", "name": "Казахстан" },
+			"provider": { "@id": "https://onleadify.com/#organization" }
+		})} />
 		
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />

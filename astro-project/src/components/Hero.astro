@@ -2,7 +2,7 @@
 
 ---
 
-<section class="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden">
+<section class="hero-section relative min-h-screen flex items-center justify-center pt-20 overflow-hidden">
   <!-- Ambient background effects -->
   <div class="absolute inset-0 bg-background"></div>
   <div class="hero-glow"></div>
@@ -14,10 +14,16 @@
       <span class="text-sm text-muted-foreground">Веб-студия и автоматизация</span>
     </div>
     
-    <h1 class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight mb-6 text-balance min-h-[1.2em] sm:min-h-[2.4em]">
-      <span class="typewriter gradient-text" id="typewriter-main"></span>
-      <span class="typing-cursor">|</span>
-    </h1>
+    <!-- Isolated typewriter container with fixed dimensions to prevent layout shifts -->
+    <div class="typewriter-wrapper">
+      <div class="typewriter-container">
+        <h1 class="typewriter-heading text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight">
+          <span class="typewriter-text">
+            <span class="typewriter gradient-text" id="typewriter-main"></span><span class="typing-cursor">|</span>
+          </span>
+        </h1>
+      </div>
+    </div>
     
     <p class="mx-auto max-w-2xl text-lg sm:text-xl text-muted-foreground mb-12 leading-relaxed hero-description">
       Разрабатываем веб-решения и внедряем AI-автоматизацию, чтобы ваш бизнес работал эффективнее и приносил больше прибыли
@@ -54,6 +60,59 @@
   </section>
 
 <style>
+  /* Isolate hero section to prevent animation affecting other sections */
+  .hero-section {
+    contain: layout style paint;
+    isolation: isolate;
+  }
+  
+  /* Wrapper with fixed height - prevents layout shifts while showing all text */
+  .typewriter-wrapper {
+    position: relative;
+    width: 100%;
+    min-height: 180px;
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  @media (min-width: 640px) {
+    .typewriter-wrapper {
+      min-height: 160px;
+    }
+  }
+  
+  @media (min-width: 768px) {
+    .typewriter-wrapper {
+      min-height: 180px;
+    }
+  }
+  
+  @media (min-width: 1024px) {
+    .typewriter-wrapper {
+      min-height: 200px;
+    }
+  }
+  
+  /* Container for typewriter text */
+  .typewriter-container {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .typewriter-heading {
+    margin: 0;
+    padding: 0;
+    line-height: 1.15;
+  }
+  
+  .typewriter-text {
+    display: inline;
+  }
+  
   /* Ambient glow effect */
   .hero-glow {
     position: absolute;
@@ -133,6 +192,16 @@
     font-weight: 100;
     opacity: 1;
     color: #a1a1aa;
+    display: inline;
+    vertical-align: baseline;
+    will-change: opacity;
+  }
+  
+  /* Optimize typewriter text rendering */
+  .typewriter {
+    display: inline;
+    will-change: contents;
+    text-rendering: optimizeSpeed;
   }
   
   .hero-description {
