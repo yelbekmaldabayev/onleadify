@@ -55,7 +55,7 @@ const cases = [
           class="case-card group rounded-xl border border-border bg-card overflow-hidden transition-all duration-500 grid grid-rows-[auto_1fr]"
           data-index={idx}
         >
-          <div class="aspect-[4/3] bg-secondary flex items-center justify-center relative overflow-hidden case-image">
+          <div class="aspect-[4/3] bg-black flex items-center justify-center relative overflow-hidden case-image">
             {caseItem.image ? (
               <img 
                 src={caseItem.image.src} 
@@ -112,7 +112,7 @@ const cases = [
   
   .case-card.active .case-image,
   .case-card:hover .case-image {
-    background: linear-gradient(135deg, rgba(38, 38, 38, 1) 0%, rgba(30, 30, 30, 1) 100%);
+    background: #000000;
   }
   
   .case-result {

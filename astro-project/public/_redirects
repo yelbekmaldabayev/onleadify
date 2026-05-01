@@ -1,0 +1,12 @@
+# Redirect www to non-www (canonical URL)
+https://www.onleadify.com/* https://onleadify.com/:splat 301!
+http://www.onleadify.com/* https://onleadify.com/:splat 301!
+http://onleadify.com/* https://onleadify.com/:splat 301!
+
+# Ensure trailing slashes are removed
+/services/ /services 301
+/cases/ /cases 301
+/about/ /about 301
+/contact/ /contact 301
+/terms/ /terms 301
+/privacy/ /privacy 301
